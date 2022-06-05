@@ -3,7 +3,7 @@ import styled from "styled-components";
 import SubHeader from "../Components/SubHeader";
 import MainFooter from "../Components/MainFooter";
 import { Link } from "react-router-dom";
-//import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const Main = styled.main`
     margin: 0 auto;
@@ -56,7 +56,7 @@ const LoginLogspan = styled.span`
     color: ${(props) => props.theme.navy};
 `;
 //━━━━━━━━━━━━━
-const LoginInput = styled.div`
+const LoginInput = styled.form`
     display: grid;
     grid-template-columns: 3fr 1fr ;
     grid-template-rows: repeat(2,1fr) ;
@@ -113,28 +113,14 @@ const LoginAlterfind = styled(Link)`
 
 `
 
-interface IForm {
-    email: string;
-    firstName: string;
-    lastName: string;
-    username: string;
-    password: string;
-    password1: string;
-    extraError?: string;    
-}
-
 function Signin() {
-    // const { 
-    // register, 
-    // handleSubmit,
-    // formState: {errors},
-    // setError,
-    // } = useForm<IForm>({
-    //     defaultValues: {
-    //         email: "@naver.com",
-    //     },
-    // });
-
+    const { register, handleSubmit, formState, setError, } = useForm();
+    
+    // RestAPI POST ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    const onValid = (data) => {
+        console.log(data);
+    };
+    //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     return(
         <>
         <SubHeader/>
@@ -150,13 +136,17 @@ function Signin() {
                     <input type="checkbox"/>
                     <LoginLogspan>아이디 저장</LoginLogspan>
                 </LoginLog>
-                <LoginInput>
+                <div>
+                <LoginInput onSubmit={handleSubmit(onValid)}>
                     <LoginInputid
-                    placeholder="아이디"></LoginInputid>
+                    {...register("key", {required: true})}
+                    placeholder="key값"></LoginInputid>
                     <LoginInputpw
+                    {...register("password", {required: true})}
                     placeholder="비밀번호"></LoginInputpw>
                     <LoginInputbutton>로그인</LoginInputbutton>
                 </LoginInput>
+                </div>
                 <LoginAlter>
                     <LoginAltersignup
                     to="/Signup"

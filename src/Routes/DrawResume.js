@@ -1,6 +1,13 @@
 import MainFooter from "../Components/MainFooter";
 import SubHeader from "../Components/SubHeader";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import SubmitButton from "../Components/SubmitButton";
+import Modal from "../Components/Modal";
+import { useCallback, useState } from "react";
+import CoverLetterList from "../Components/CoverLetterList";
+import CareerList from "../Components/CareerList";
 
 const Entire = styled.div`
     display: flex;
@@ -33,17 +40,14 @@ const Header = styled.header`
     font-weight: bold;
     letter-spacing: -2;
     border-bottom: 2px solid #333;
+    margin-bottom: 10px;
 `;
 
-const MainBasic = styled.section`
-    margin-bottom: 20px;
-`;
-
-const MainBasicdiv = styled.div`
+const Infodiv = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    height: 220px;
+    height: 170px;
 
 `;
 
@@ -52,21 +56,22 @@ const Img = styled.img`
     object-fit: scale-down;
 `;
 
-const MainBasicdivInfo = styled.ul`
+const InfodivInfo = styled.ul`
     display: flex;
     flex-direction: column;
     margin-left: 20px;
-    width: 530px;
+    width: 400px;
     height: 160px;
 
 `
 
-const MainBasicdivInfoelement = styled.li`
+const InfoItem = styled.li`
     height: 20%;
     display: flex;
     &:first-child {
         border-bottom: 1px solid ${(props) => props.theme.lightgray};
         margin-bottom: 15px;
+        margin-right: 0;
         span {
             font-size: 22px;
         }
@@ -82,18 +87,8 @@ const MainBasicdivInfoelement = styled.li`
 `;
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const MainTitle = styled.section`
-    margin-bottom: 20px;
-`;
 
-const MainTitlediv = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 60px;
-`;
-
-const MainTitleInput = styled.input`
+const TitleInput = styled.input`
     width: 100%;  
     height: 40px;
     font-size: 15px;
@@ -103,13 +98,6 @@ const MainTitleInput = styled.input`
     }
 `;
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const MainEducation = styled.section`
-    margin-bottom: 20px;
-`;
-
-const MainEducationdiv = styled.div`
-    
-`;
 
 const AddInfo = styled.button`
     margin-top: 10px;
@@ -122,121 +110,128 @@ const AddInfo = styled.button`
     height: 40px;
     background-color: transparent;
     border: 1px dashed ${(props) => props.theme.skyblue};
+    
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const MainCareer = styled.section`
-    margin-bottom: 20px;
 
-`;
 
-const MainCareerdiv = styled.div`
-`;
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const MainCL = styled.section`
-    margin-bottom: 20px;
+const Section = styled.section`
+    margin: 20px 0;
 `;
 
-const MainCLdiv = styled.div`
-`;
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const MainCertificate = styled.section`
-`;
-
-const MainCertificatediv = styled.div`
+const CoverLetter = styled.input`
     margin-top: 10px;
-`;
-
-const MainClinput = styled.input`
-    width: 99%;
-    height: 400px;
+    width: 100%;
+    height: 250px;
 `
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-const Maindiv = styled.div`
+const Footer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;;
     height: 100px;
 `;
 
-const MainButton = styled.button`
-    color: #f5f6fa;
-    background-color: #45aaf2;
-    border: 0;
-    font-size: 18px;
-    font-weight: bold; 
-    width: 142px;
-    height: 44px;
-`;
-
-
 function DrawResume() {
+    const { register, handleSubmit, formState } = useForm();
+    const navigate = useNavigate();
+    const onValid = (data) => {
+        console.log(data);
+    }
+
+    const submitClick = () => {
+        alert("저장되었습니다.");
+        navigate("/");
+    }
+
+    const [isOpenModalCL, setOpenModalCL] = useState(false);
+    const [isOpenModalCR, setOpenModalCR] = useState(false);
+
+
+    const onClickToggleModalCL = useCallback(() => {
+      setOpenModalCL(!isOpenModalCL);
+    }, [isOpenModalCL]);
+
+    const onClickToggleModalCR = useCallback(() => {
+      setOpenModalCR(!isOpenModalCR);
+    }, [isOpenModalCR]);
+
     return (
         <>
         <SubHeader/>
         <Entire>
+            {isOpenModalCL && (
+                <Modal onClickToggleApplyInfo={onClickToggleModalCL}>
+                    <CoverLetterList/>
+                </Modal>
+            )}
+            {isOpenModalCR && (
+                <Modal onClickToggleApplyInfo={onClickToggleModalCR}>
+                    <CareerList/>
+                </Modal>
+            )}
             <Mainbg>
                 <Main>
-                    <MainBasic>
+                    <Section>
                         <Header>기본정보</Header>
-                        <MainBasicdiv>
+                        <Infodiv>
                             <Img
-                            src="http://t0.gstatic.com/licensed-image?q=tbn:ANd9GcRNogHnLEyvhdnh4N6c-kg3nTfQp0QQrhHw4OYvhp56fpjFAJdPwvfcIfu5pcLgBXVy">                                
+                            src="https://www.snsboom.co.kr/common/img/default_profile.png">                                
                             </Img>
                             <nav>
-                            <MainBasicdivInfo>
-                                <MainBasicdivInfoelement>
+                            <InfodivInfo>
+                                <InfoItem>
                                     <span>배성민</span><span>생년 월일</span>
-                                </MainBasicdivInfoelement>
-                                <MainBasicdivInfoelement>
+                                </InfoItem>
+                                <InfoItem>
                                     <span>연락처:</span><span>XXX-XXXX-XXXX</span>
-                                </MainBasicdivInfoelement>
-                                <MainBasicdivInfoelement>
+                                </InfoItem>
+                                <InfoItem>
                                     <span>이메일:</span><span>1998.09.16</span>
-                                </MainBasicdivInfoelement>
-                                <MainBasicdivInfoelement>
+                                </InfoItem>
+                                <InfoItem>
                                     <span>주소:</span><span>대전광역시</span>
-                                </MainBasicdivInfoelement>
-                            </MainBasicdivInfo>
+                                </InfoItem>
+                            </InfodivInfo>
                             </nav>
-                        </MainBasicdiv>
-                    </MainBasic>
-                    <MainTitle>
+                        </Infodiv>
+                    </Section>
+                    <Section>
                         <Header>이력서 제목</Header>
-                        <MainTitlediv>
-                            <MainTitleInput
-                            placeholder="(최대 25자)"/>
-                        </MainTitlediv>
-                    </MainTitle>
-                    <MainEducation>
-                        <Header>학력</Header>
-                        <MainEducationdiv>
-                            <AddInfo>+ 학력 추가</AddInfo>
-                        </MainEducationdiv>
-                    </MainEducation>
-                    <MainCareer>
+                        <TitleInput placeholder="제목 (최대 25자)"/>
+                    </Section>
+                    <Section>
                         <Header>경력</Header>
-                        <MainCareerdiv>
-                            <AddInfo>+ 경력 추가</AddInfo>
-                        </MainCareerdiv>
-                    </MainCareer>
-                    <MainCL>
-                        <Header>자격증</Header>
-                        <MainCLdiv>
-                            <AddInfo>+ 자격증 추가</AddInfo>
-                        </MainCLdiv>
-                    </MainCL>
-                    <MainCertificate>
-                        <Header>자기소개서</Header>
-                        <MainCertificatediv>
-                            <MainClinput></MainClinput>
-                        </MainCertificatediv>
-                    </MainCertificate>
-                    <Maindiv>
-                        <MainButton>
-                            이력서 저장
-                        </MainButton>
-                    </Maindiv>                
+                        <AddInfo
+                        onClick={onClickToggleModalCR}>+ 경력 추가</AddInfo>
+                    </Section>
+                    <Section>
+                        <Header>자기소개서 불러오기</Header>
+                        <AddInfo 
+                        onClick={onClickToggleModalCL}>+ 자기소개서 선택</AddInfo>
+                    </Section>
+                    <form onSubmit={handleSubmit(onValid)}>
+                    <Section>
+                        <Header>자기소개서 작성</Header>
+                        <TitleInput 
+                        placeholder="제목 (최대 25자)"
+                        {...register("title", {required: true})}
+                        />
+                        <CoverLetter
+                        {...register("cover-letter", {required: true})}>
+                        </CoverLetter>
+                    </Section>
+                    <Footer>
+                        <SubmitButton
+                        text="이력서 저장"
+                        onClick={submitClick}
+                        />
+                    </Footer>
+                    </form>                
                 </Main>
             </Mainbg>
         </Entire>
