@@ -192,7 +192,7 @@ function MainHeader() {
         navigate("/");
     }
     
-    const inputChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const inputChange = (event) => {
         const {
             currentTarget: { value },
         } = event;
