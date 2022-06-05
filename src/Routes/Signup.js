@@ -61,11 +61,6 @@ const Button = styled.button`
     }
 `;
 
-const ButtonImg = styled.img`
-    object-fit: scale-down;
-    height: 40px;
-`;
-
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 const Password = styled.div`
     margin-top: 30px;
@@ -150,9 +145,8 @@ function Signup () {
             "pubKey": "0x031ef767936996de95f5be7b36fada08d070b97e85d874ce23e5f9fcbdf7149aa2"
         }   
     }
-
-
     //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
     const EmployeeClick = () => {
         setIsEmployee((prev) => !prev);
         if(isEmployer) {

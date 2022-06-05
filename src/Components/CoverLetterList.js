@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function CoverLetterList() {
+    useEffect(() => {
+        console.log("CoverLetterMount");
+    }, []);
+
     return(
         <>
-            <h1>adf</h1>
+            <h1>adsf</h1>
         </>
     );
 }

@@ -4,6 +4,8 @@ import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useForm } from "react-hook-form";
+import SubmitButton from "../Components/SubmitButton";
 
 const Entire = styled.div`
     display: flex;
@@ -119,16 +121,35 @@ const MainPeriodMainElement = styled.section`
 `;
 
 const FullImg = styled.img`
-    margin: 20px auto;
+    margin: 20px ;
     width: 20%;
     object-fit: scale-down;
 `;
 
 const FullImgdiv = styled.div`
+    width: 100%;
+    height: 240px;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    
+`;
 
+const Condition = styled.ul`
+    margin-top: 15px;
+`;
+
+
+const ConditionItem = styled.li`
+    padding: 10px;
+    span {
+        color: ${(props) => props.theme.deepnavy};
+        font-size: 17px;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+    input {
+        border: 0;
+        border-bottom: 1px solid ${(props) => props.theme.gray};
+    }
 `;
 
 const CustomDatePickerflex = styled.div`
@@ -157,22 +178,13 @@ const Maindiv = styled.section`
     height: 100px;
 `;
 
-const MainButton = styled.button`
-    color: #f5f6fa;
-    background-color: #45aaf2;
-    border: 0;
-    font-size: 18px;
-    font-weight: bold; 
-    width: 142px;
-    height: 44px;
-`;
-
 function DrawPost() {
     const [isFull, setIsFull] = useState(true);
     const [isPart, setIsPart] = useState(false);
     const [isIntern, setIntern] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const { register, handleSubmit, formState } = useForm();
 
     const allFalse = () => {
         setIsFull(false);
@@ -192,6 +204,13 @@ function DrawPost() {
             setIntern(!isIntern);
         }
     }
+
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    const onValid = (data) => {
+        console.log(data);
+    }
+//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
 
     return (
         <>
@@ -225,81 +244,104 @@ function DrawPost() {
                         }
                     </MainCataList>
                 </MainCata>
+                <form onSubmit={handleSubmit(onValid)}>
                 <MainTitle>
                     <Header>제목</Header>
                     <MainInput
+                    {...register("title", {required: true})}
                     propsheight="35px"
                     placeholder="최대 25자"></MainInput>
                 </MainTitle>
                 <MainPeriod>
-                    <Header>기간</Header>
-                        { isFull ?
-                        <FullImgdiv>
-                            <FullImg
-                            src={require("../img/officalImg2.png")}
-                            ></FullImg>
-                        </FullImgdiv>
-                        :
-                            <></>
-                        }
-                        { isPart ?
-                            <MainPeriodmain>
-                                <MainPeriodDay>월</MainPeriodDay>
-                                <MainPeriodDay>화</MainPeriodDay>
-                                <MainPeriodDay>수</MainPeriodDay>
-                                <MainPeriodDay>목</MainPeriodDay>
-                                <MainPeriodDay>금</MainPeriodDay>
-                                <MainPeriodDay>토</MainPeriodDay>
-                                <MainPeriodDay>일</MainPeriodDay>
-                            </MainPeriodmain>
-                        :
-                            <></>
-                        }
-                        { isIntern ?
-                        <MainPeriodMain>
-                            <MainPeriodMainElement>
-                                <PeriodHeader>
-                                    🐣 시작일
-                                </PeriodHeader>
-                                <CustomDatePickerflex>
-                                    <CustomDatePicker
-                                    selected={startDate}
-                                    onChange={(date) => setStartDate(date)}
-                                    selectsStart
-                                    startDate={startDate}
-                                    endDate={endDate}
-                                    />
-                                </CustomDatePickerflex>
-                            </MainPeriodMainElement>
-                            <MainPeriodMainElement>
-                                <PeriodHeader>
-                                    🐓 종료일
-                                </PeriodHeader>
-                                <CustomDatePickerflex>
-                                    <CustomDatePicker
-                                    selected={endDate}
-                                    onChange={(date) => setEndDate(date)}
-                                    selectsEnd
-                                    endDate={endDate}
-                                    minDate={startDate}
-                                    />
-                                </CustomDatePickerflex>
-                            </MainPeriodMainElement>
-                        </MainPeriodMain>
-                        :
-                            <></>
-                        }
+                    <Header>근무환경</Header>
+                    { isFull && (
+                    <FullImgdiv>
+                        <FullImg
+                        src={require("../img/officalImg2.png")}/>
+                        <nav>
+                            <Condition>
+                                <ConditionItem>
+                                    <span>근무기간</span>
+                                    <input
+                                    {...register("employment_period", {required: true})}/>
+                                </ConditionItem>
+                                <ConditionItem>
+                                    <span>근무시간</span>
+                                    <input
+                                    {...register("working_time", {required: true})}/>
+                                </ConditionItem>
+                                <ConditionItem>
+                                    <span>급여종류</span>
+                                    <input
+                                    {...register("payment_interval_type", {required: true})}/>
+                                </ConditionItem>
+                                <ConditionItem>
+                                    <span>급여금액</span>
+                                    <input
+                                    {...register("payment_per_interval", {required: true})}/>
+                                </ConditionItem>
+                                <ConditionItem>
+                                    <span>모집인원</span>
+                                    <input
+                                    {...register("hiring_number", {required: true})}/>
+                                </ConditionItem>
+                            </Condition>
+                        </nav>
+                    </FullImgdiv> )}
+                    { isPart && (
+                        <MainPeriodmain>
+                            <MainPeriodDay>월</MainPeriodDay>
+                            <MainPeriodDay>화</MainPeriodDay>
+                            <MainPeriodDay>수</MainPeriodDay>
+                            <MainPeriodDay>목</MainPeriodDay>
+                            <MainPeriodDay>금</MainPeriodDay>
+                            <MainPeriodDay>토</MainPeriodDay>
+                            <MainPeriodDay>일</MainPeriodDay>
+                        </MainPeriodmain>)}
+                    { isIntern && (
+                    <MainPeriodMain>
+                        <MainPeriodMainElement>
+                            <PeriodHeader>
+                                🐣 시작일
+                            </PeriodHeader>
+                            <CustomDatePickerflex>
+                                <CustomDatePicker
+                                selected={startDate}
+                                onChange={(date) => setStartDate(date)}
+                                selectsStart
+                                startDate={startDate}
+                                endDate={endDate}
+                                />
+                            </CustomDatePickerflex>
+                        </MainPeriodMainElement>
+                        <MainPeriodMainElement>
+                            <PeriodHeader>
+                                🐓 종료일
+                            </PeriodHeader>
+                            <CustomDatePickerflex>
+                                <CustomDatePicker
+                                selected={endDate}
+                                onChange={(date) => setEndDate(date)}
+                                selectsEnd
+                                endDate={endDate}
+                                minDate={startDate}
+                                />
+                            </CustomDatePickerflex>
+                        </MainPeriodMainElement>
+                    </MainPeriodMain>)}
                 </MainPeriod>
                 <MainStory>
                     <Header>내용</Header>
                     <MainInput
                     propsheight="300px"
                     placeholder="최대 2000자"
-                    ></MainInput>
+                    {...register("content", {required: true})}/>
                 </MainStory>
                 <Maindiv>
-                        <MainButton>공고등록 완료</MainButton>
+                        <SubmitButton
+                        text="공고등록"/>
                 </Maindiv>
+                </form>
             </Main>
             </Mainbg>
         </Entire>

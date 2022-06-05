@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import SubmitButton from "../Components/SubmitButton";
 import Modal from "../Components/Modal";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CoverLetterList from "../Components/CoverLetterList";
 import CareerList from "../Components/CareerList";
 
@@ -86,8 +86,6 @@ const InfoItem = styled.li`
     
 `;
 
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 const TitleInput = styled.input`
     width: 100%;  
     height: 40px;
@@ -97,7 +95,6 @@ const TitleInput = styled.input`
       padding-left: 10px;
     }
 `;
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 const AddInfo = styled.button`
     margin-top: 10px;
@@ -116,8 +113,6 @@ const AddInfo = styled.button`
     }
 `;
 
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 
 const Section = styled.section`
     margin: 20px 0;
@@ -128,7 +123,6 @@ const CoverLetter = styled.input`
     width: 100%;
     height: 250px;
 `
-//━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 const Footer = styled.div`
     display: flex;
     justify-content: center;
@@ -138,7 +132,18 @@ const Footer = styled.div`
 
 function DrawResume() {
     const { register, handleSubmit, formState } = useForm();
+    const [isOpenModalCL, setOpenModalCL] = useState(false);
+    const [isOpenModalCR, setOpenModalCR] = useState(false);
+    const [ CLList, setCLList ] = useState([]);
+    const [ CRList, setCRList ] = useState([]);
+
+    useEffect(() => {
+        console.log("mount");
+    },[]);
+
+
     const navigate = useNavigate();
+    
     const onValid = (data) => {
         console.log(data);
     }
@@ -147,10 +152,6 @@ function DrawResume() {
         alert("저장되었습니다.");
         navigate("/");
     }
-
-    const [isOpenModalCL, setOpenModalCL] = useState(false);
-    const [isOpenModalCR, setOpenModalCR] = useState(false);
-
 
     const onClickToggleModalCL = useCallback(() => {
       setOpenModalCL(!isOpenModalCL);
@@ -200,20 +201,25 @@ function DrawResume() {
                             </nav>
                         </Infodiv>
                     </Section>
-                    <Section>
+                    <form>
+                    <Section style={{marginTop: "40px"}}>
                         <Header>이력서 제목</Header>
                         <TitleInput placeholder="제목 (최대 25자)"/>
                     </Section>
                     <Section>
                         <Header>경력</Header>
+                        {
                         <AddInfo
                         onClick={onClickToggleModalCR}>+ 경력 추가</AddInfo>
+                        }
                     </Section>
                     <Section>
                         <Header>자기소개서 불러오기</Header>
+                        
                         <AddInfo 
                         onClick={onClickToggleModalCL}>+ 자기소개서 선택</AddInfo>
                     </Section>
+                    </form>
                     <form onSubmit={handleSubmit(onValid)}>
                     <Section>
                         <Header>자기소개서 작성</Header>

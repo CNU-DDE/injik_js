@@ -1,7 +1,7 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import styled from "styled-components";
 
-function Modal({ onClickToggleApplyInfo, children,}) {
+function Modal({ onClickToggleApplyInfo, children}) {
   return (
     <Entire>
       <DialogBox>{children}</DialogBox>
