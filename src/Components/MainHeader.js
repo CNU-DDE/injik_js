@@ -216,11 +216,17 @@ function MainHeader() {
         }
     }
 
+    const temp = () => {
+        setIsLogined(prev => !prev);
+    }
+
     return (
         <Header>
             <Search>
                 <Sign>
                     <SignUl>
+                    <button
+                            onClick={temp}>asdf</button>
                         { isLogined ?
                         <SignLi>
                             <Link
@@ -229,6 +235,7 @@ function MainHeader() {
                             >
                                 <span>로그아웃</span>
                             </Link>
+
                         </SignLi>      
                         : 
                         <SignLi>
@@ -307,7 +314,7 @@ function MainHeader() {
                                 <span>📢공고등록</span>
                             </button>
                         </MenuLi>
-                        { isLogined ?  
+                        {/* { isLogined ?  
                         <>
                         <MenuLi>
                             <button onClick={WorkStart}>
@@ -330,7 +337,7 @@ function MainHeader() {
                             </button>
                         </MenuLi>
                         </>
-                        : <></>}
+                        : <></>} */}
                     </MenuUl>
                 </MenuNav>
             </Menu>
