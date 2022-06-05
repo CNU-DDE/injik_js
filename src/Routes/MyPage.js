@@ -4,7 +4,7 @@ import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
 import { ResumeList } from "./sample";
 import { Link } from "react-router-dom";
-import Apply from "../Components/Apply";
+import Modal from "../Components/Modal";
 import ApplyInfo from "../Components/AppyInfo";
 
 const Entire = styled.div`
@@ -125,9 +125,9 @@ function MyPage() {
             <MainHeader/>
             <Main>
                 {isOpenModal && ( 
-                    <Apply onClickToggleApplyInfo={onClickToggleModal}>
+                    <Modal onClickToggleApplyInfo={onClickToggleModal}>
                         <ApplyInfo/>
-                    </Apply>
+                    </Modal>
                 )}
                 <Menu>
                     <ul>

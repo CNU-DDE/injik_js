@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useState,useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import Modal from "../Components/Modal";
+import KeyStoreInfo from "../Components/KeyStoreInfo";
 
 const Main = styled.main`
     display: flex;
@@ -125,7 +127,32 @@ function Signup () {
     const [ isEmployee, setIsEmployee ] = useState(false);
     const { register, handleSubmit, formState } = useForm();
     const navigate = useNavigate();
+    const [isOpenModal, setOpenModal] = useState(false);
 
+    const onClickToggleModal = useCallback(() => {
+      setOpenModal(!isOpenModal);
+    }, [isOpenModal]);
+
+     // RestAPI POST ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    const RestPost = (data) => {
+        const Restobj = {...data};
+        delete Restobj.pwcheck;
+        Restobj["isEmployee"] = isEmployee;
+        return Restobj;
+    }
+
+    const response = {
+        "error": null,
+        "keystore": {
+            "did": "did:ethr:ropsten:0x02ac49094591d32a4e2f93f3368da2d7d827e987ce6cdb3bd3b8a3390fde8fc33b",
+            "walletAddress": "0xf1232f840f3ad7d23fcdaa84d6c66dac24efb198",
+            "privKey": "d8b595680851765f38ea5405129244ba3cbad84467d190859f4c8b20c1ff6c75",
+            "pubKey": "0x031ef767936996de95f5be7b36fada08d070b97e85d874ce23e5f9fcbdf7149aa2"
+        }   
+    }
+
+
+    //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     const EmployeeClick = () => {
         setIsEmployee((prev) => !prev);
         if(isEmployer) {
@@ -141,10 +168,9 @@ function Signup () {
     }
 
     const onValid = (data) => {
-        if(data.password === data.pwcheck) {
-            alert("회원가입 완료.");
+        if((data.password === data.pwcheck) && (isEmployee || isEmployer) === true) {
             RestPost(data);
-            //navigate("/");
+            setOpenModal(true);
         } else {
             if((isEmployee === false) && (isEmployer === false)) {
                 alert("가입 구분을 선택해주세요.");
@@ -154,13 +180,15 @@ function Signup () {
         }
     };
 
-    const RestPost = (data) => {
-        console.log(data);
-    }
 
     return(
         <>
             <Main>
+                {isOpenModal && ( 
+                    <Modal onClickToggleApplyInfo={onClickToggleModal}>
+                        <KeyStoreInfo keystore={response.keystore}/>
+                    </Modal>
+                )}
                 <Img
                 src={require("../img/injiklogo2.png")}
                 >

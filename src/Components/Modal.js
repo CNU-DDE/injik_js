@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from "react";
 import styled from "styled-components";
 
-function Apply({ onClickToggleApplyInfo, children,}) {
+function Modal({ onClickToggleApplyInfo, children,}) {
   return (
     <Entire>
       <DialogBox>{children}</DialogBox>
@@ -20,7 +20,7 @@ function Apply({ onClickToggleApplyInfo, children,}) {
 
 const Entire = styled.div`
   width: 100%;
-  height: 600px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,8 +29,8 @@ const Entire = styled.div`
 
 const DialogBox = styled.dialog`
   background-color: ${(props) => props.theme.white1};
-  width: 800px;
-  height: 1000px;
+  min-width: 700px;
+  //height: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -50,4 +50,4 @@ const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
 `;
 
-export default Apply;
+export default Modal;

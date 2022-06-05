@@ -16,13 +16,10 @@ const MainButton = styled.button`
     }
 `;
 
-interface IText {
-    text: string,
-};
-
-function SubmitButton({text} : IText) {
+function SubmitButton({text, onClick}) {
     return(
-        <MainButton>
+        <MainButton
+        onClick={onClick}>
             {text}
         </MainButton>
     );

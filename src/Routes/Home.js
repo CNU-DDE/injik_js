@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FullTimeList, PartTimeList, InternList } from "../sample";
+import { FullTimeList, PartTimeList, InternList } from "./sample";
 import styled from "styled-components";
 import MainHeader from "../Components/MainHeader";
 import MainFooter from "../Components/MainFooter";
