@@ -14,6 +14,7 @@ const Entire = styled.div`
 `;
 
 const Main = styled.div`
+    min-width: 750px;
     width: 40%;
     box-shadow: 0 0 8px rgb(0 0 0 / 6%);
     background-color: ${(props) => props.theme.white};

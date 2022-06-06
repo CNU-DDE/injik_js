@@ -116,6 +116,7 @@ const SearchIcon = styled.img`
 const Menu = styled.div`
     border-top: 1px solid ${(props) => props.theme.lightgray};
     border-bottom: 5px solid ${(props) => props.theme.skyblue};
+    z-index: 1000;
 `;
 
 const MenuNav = styled.div`
@@ -158,6 +159,7 @@ const MenuLi = styled.li`
 function MainHeader() {
     const navigate = useNavigate();
     const [isLogined, setIsLogined] = useState(false);
+    const [isEmployee, setIsEmployee] = useState(true);
     const { register, watch } = useForm();
     const [start, setStart] = useState([0,0,0,0,0,0]);
     const [end, setEnd] = useState([0,0,0,0,0,0]);
@@ -226,7 +228,7 @@ function MainHeader() {
                 <Sign>
                     <SignUl>
                     <button
-                            onClick={temp}>asdf</button>
+                        onClick={temp}>asdf</button>
                         { isLogined ?
                         <SignLi>
                             <Link
@@ -291,16 +293,20 @@ function MainHeader() {
                             <span>Ξ 전체메뉴</span>
                         </MenuLi>
                         <MenuLi>
-                            <span>대기업채용</span>
+                            <span>지역별 알바</span>
                         </MenuLi>
                         <MenuLi>
-                            <span>신입/경력</span>
+                            <span>채용·인턴</span>
                         </MenuLi>
                         <MenuLi>
-                            <span>고객지원</span>
+                            <span>커뮤니티</span>
                         </MenuLi>
                         <MenuLi>
-                            <span>인적성·면접</span>
+                            { isEmployee &&
+                            <button onClick={toResume}>
+                                <span>경력발급</span>
+                            </button>
+                            }
                         </MenuLi>
                     </MenuUl>
                     <MenuUl>

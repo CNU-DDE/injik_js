@@ -2,10 +2,11 @@ import React, { useCallback, useState } from "react";
 import MainHeader from "../Components/MainHeader";
 import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
-import { ResumeList } from "./sample";
+import { ResumeList } from "../sample";
 import { Link } from "react-router-dom";
 import Modal from "../Components/Modal";
 import ApplyInfo from "../Components/AppyInfo";
+import VCRequest from "../Components/VCRequest";
 
 const Entire = styled.div`
     width: 100%;
@@ -27,11 +28,24 @@ const Menu = styled.nav`
 `;
 
 const MenuLi = styled.li`
+    width: 100%;
+`;
+
+const MenuButton = styled.button`
     font-size: 16px;
     font-weight: 600;
+    width: 100%;
     background-color: ${(props) => props.theme.white1};
     padding: 25px 50px;
     border: 1px solid ${(props) => props.theme.lightgray};
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+const ClickMenuButton = styled(MenuButton)`
+    color: ${(props) => props.theme.white1};
+    background-color: #0097e6; 
 `;
 
 const List = styled.nav`
@@ -92,6 +106,14 @@ const Item = styled.button`
     }
 `;
 
+const Request = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 
 const Title = styled.h3`
   text-align: center;
@@ -115,10 +137,29 @@ const DialogButton = styled.button`
 
 function MyPage() {
     const [isOpenModal, setOpenModal] = useState(false);
+    const [isApplyList, setIsApplyList] = useState(true);
+    const [isVCList, setIsVCList] = useState(false);
 
     const onClickToggleModal = useCallback(() => {
       setOpenModal(!isOpenModal);
     }, [isOpenModal]);
+
+    const allFalse = () => {
+        setIsApplyList(false);
+        setIsVCList(false);
+    }
+
+    const ApplyClick = (e) => {
+        //e.preventDefault();
+        allFalse();
+        setIsApplyList(prev => !prev);
+    }
+
+    const VCClick = (e) => {
+        //e.preventDefault();
+        allFalse();
+        setIsVCList(prev => !prev);
+    }
 
     return (
         <Entire>
@@ -131,16 +172,36 @@ function MyPage() {
                 )}
                 <Menu>
                     <ul>
-                        <MenuLi
-                        style={{
-                            backgroundColor: "#0097e6",
-                            color: "f7f7f7"
-                            }}><span>지원목록</span></MenuLi>
-                        <MenuLi><span>개인설정</span></MenuLi>
-                        <MenuLi><span>쪽지함</span></MenuLi>
+                        {isApplyList ?
+                        <MenuLi>
+                            <ClickMenuButton
+                            onClick={ApplyClick}>지원목록</ClickMenuButton>
+                        </MenuLi>
+                        :
+                        <MenuLi>
+                            <MenuButton
+                            onClick={ApplyClick}>지원목록</MenuButton>
+                        </MenuLi>
+                        }
+                        {isVCList ?
+                        <MenuLi>
+                            <ClickMenuButton
+                            onClick={VCClick}>경력발급</ClickMenuButton>
+                        </MenuLi>
+                        :
+                        <MenuLi>
+                            <MenuButton
+                            onClick={VCClick}>경력발급</MenuButton>
+                        </MenuLi>
+                        }
+                        <MenuLi>
+                            <MenuButton>쪽지함</MenuButton>
+                        </MenuLi>
                     </ul>
                 </Menu>
                 <List>
+                { isApplyList && 
+                    <>
                     <Sort>
                         <SortItem>
                             <span>⇅ 정렬기준</span>
@@ -162,7 +223,14 @@ function MyPage() {
                         </Item>
                         )}
                     </ul>
-                </List>
+                    </>
+                }
+                { isVCList &&
+                    <Request> 
+                        <VCRequest/>
+                    </Request>  
+                }
+                </List>  
             </Main> 
             <MainFooter/>
         </Entire>
