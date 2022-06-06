@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import SubmitButton from "../Components/SubmitButton";
+import officalImg2 from "../img/officalImg2.png";
 
 const Entire = styled.div`
     display: flex;
@@ -257,7 +258,7 @@ function DrawPost() {
                     { isFull && (
                     <FullImgdiv>
                         <FullImg
-                        src={require("../img/officalImg2.png")}/>
+                        src={officalImg2}/>
                         <nav>
                             <Condition>
                                 <ConditionItem>

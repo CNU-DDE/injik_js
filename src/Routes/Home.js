@@ -5,6 +5,8 @@ import { FullTimeList, PartTimeList, InternList } from "../sample";
 import styled from "styled-components";
 import MainHeader from "../Components/MainHeader";
 import MainFooter from "../Components/MainFooter";
+import mention from "../img/mention.png";
+import career2 from "../img/career2.png";
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Main 
 const Main = styled.main`
@@ -124,10 +126,10 @@ function Home() {
         <MainHeader/>
         <SubMain>
             <SubMainImg
-            src={require("../img/career2.png")} alt="직업">
+            src={career2} alt="직업">
             </SubMainImg>
             <SubMainMent
-            src={require("../img/mention.png")} alt="멘트"
+            src={mention} alt="멘트"
             >
             </SubMainMent>
         </SubMain>

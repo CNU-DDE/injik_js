@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
-import smallpigeon from require("../img/smallpigeon.png");
+import smallpigeon from "../img/smallpigeon.png";
 
 const Header = styled.header`
     display: flex;
