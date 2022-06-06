@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router";
+import smallpigeon from require("../img/smallpigeon.png");
 
 const Header = styled.header`
     display: flex;
@@ -71,7 +72,7 @@ function SubHeader() {
     return (
         <Header>
             <Button onClick={onClick}>
-                <Img src={require("../img/smallpigeon.png")}/>
+                <Img src={smallpigeon}/>
             </Button>
             <MenuList>
                 <span style={{opacity: "0.2", margin: "0 10px"}}>|</span>

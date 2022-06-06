@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import SubmitButton from "./SubmitButton";
+import { useForm } from "react-hook-form";
 
 const Entire = styled.div`
     width: 80%;
@@ -67,18 +69,50 @@ const ClaimItem = styled.li`
     }
 `;
 
+const Footer = styled.footer`
+    height: 170px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 function VCRequest() {
+    const { register, handleSubmit, formState } = useForm();
+
+    const onValid = (data) => {
+        PostAPI(data);
+    }
+
+    //REST API━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    const PostAPI = (data) => {
+        const PostJSON = {};
+        const tempObj = {
+            "from": data.from,
+            "to": data.to,
+            "at": data.at,
+            "what": data.what, 
+        };
+        PostJSON.issuer = data.issuer;
+        PostJSON.title = data.title;
+        PostJSON.claim = tempObj;
+        console.log(PostJSON);
+    }
+    //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     return (
     <Entire>
         <Main>
+            <form onSubmit={handleSubmit(onValid)}>
             <Info>
                 <InfoItem>
                     <span>발급제목{" "}</span>
-                    <input></input>
+                    <input
+                    {...register("title", {required: true})}></input>
                 </InfoItem>
                 <InfoItem>
                     <span>발급자ID{" "}</span>
-                    <input></input>
+                    <input
+                    {...register("issuer", {required: true})}></input>
                 </InfoItem>
             </Info>
             <Header>
@@ -88,22 +122,31 @@ function VCRequest() {
                 <Claim>
                     <ClaimItem>
                         <span>시작일{" "}</span>
-                        <input></input>
+                        <input
+                        {...register("from", {required: true})}></input>
                     </ClaimItem>
                     <ClaimItem>
                         <span>종료일{" "}</span>
-                        <input></input>
+                        <input
+                        {...register("to", {required: true})}></input>
                     </ClaimItem>
                     <ClaimItem>
                         <span>근무장소</span>
-                        <input></input>
+                        <input
+                        {...register("at", {required: true})}></input>
                     </ClaimItem>
                     <ClaimItem>
                         <span>근무내용</span>
-                        <input></input>
+                        <input
+                        {...register("what", {required: true})}></input>
                     </ClaimItem>
                 </Claim>
             </nav>
+            <Footer>
+                <SubmitButton
+                text="발급"/>
+            </Footer>
+            </form>
         </Main>
     </Entire>
     );

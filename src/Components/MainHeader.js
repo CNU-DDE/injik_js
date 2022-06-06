@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import logo from "../img/injiklogo.png";
+import searchicon from "../img/searchicon.png";
 
 const UlParent = styled.ul`
     list-style: none;
@@ -275,13 +277,13 @@ function MainHeader() {
                 </Sign>
                 <SearchSection>
                         <IconButton onClick={reload}>
-                            <IconImg src={require("../img/injiklogo.png")} alt="로고"></IconImg>
+                            <IconImg src={logo} alt="로고"></IconImg>
                         </IconButton>
                         <SearchBox>
                             <input type="text" placeholder="&nbsp;&nbsp;검색어" onChange={inputChange} autoFocus
                             style={{marginLeft: "10px"}}/>
                             <SearchButton>
-                                <SearchIcon src={require("../img/searchicon.png")} alt="버튼이미지"/>
+                                <SearchIcon src={searchicon} alt="버튼이미지"/>
                             </SearchButton>
                         </SearchBox>
                 </SearchSection>

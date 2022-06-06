@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import injiklogomini from "../img/injiklogomini.png";
 
 const UlParent = styled.ul`
     list-style: none;
@@ -84,7 +85,7 @@ function MainFooter() {
                 </InfoUl>
             </Info>
             <Contact>
-                <Icon src={require("../img/injiklogomini.png")} alt="하단로고"></Icon>
+                <Icon src={injiklogomini} alt="하단로고"></Icon>
                 <ul>
                     <li style={{fontSize: 20}}>고객센터</li>
                     <li style={{fontSize: 30,fontWeight: "bold",color: "#2f3640"}}>2017-2023</li>
