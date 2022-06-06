@@ -9,6 +9,7 @@ import SearchInfo from "./Routes/SearchInfo";
 import Contract from "./Routes/Contract";
 import MyPage from "./Routes/MyPage";
 
+
 const AppRouter = () => {
     return (
         <Router>
@@ -19,7 +20,7 @@ const AppRouter = () => {
                 <Route path="/DrawResume" element={<DrawResume/>}></Route>
                 <Route path="/DrawPost" element={<DrawPost/>}></Route>
                 <Route path="/:cata/:no" element={<PostInfo/>}></Route>
-                <Route path="/:brandname" element={<SearchInfo/>}></Route>
+                {/* <Route path="/:brandname" element={<SearchInfo/>}></Route> */}
                 <Route path="/MyPage" element={<MyPage/>}></Route>
                 <Route path="/:cata/:no/Contract" element={<Contract/>}></Route>
             </Routes>        
