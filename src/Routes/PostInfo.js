@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
-import Map from "../Components/Map";
+//import Map from "../Components/Map";
 
 const Entire = styled.div`
     display: flex;
@@ -14,7 +14,7 @@ const Entire = styled.div`
 `;
 
 const Main = styled.div`
-    min-width: 750px;
+    min-width: 750px
     width: 40%;
     box-shadow: 0 0 8px rgb(0 0 0 / 6%);
     background-color: ${(props) => props.theme.white};
@@ -172,7 +172,7 @@ function PostInfo() {
                     </MainStoryStory>
                 </MainStoryArea>
                 <MainWorkingArea>
-                    <Map/>
+            
                 </MainWorkingArea>
                 <MainEmplorerInfo>
                     <MainEmplorerInfoUl>

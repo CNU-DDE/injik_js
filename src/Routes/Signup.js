@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import Modal from "../Components/Modal";
 import KeyStoreInfo from "../Components/KeyStoreInfo";
+import axios from "axios";
 
 const Main = styled.main`
     display: flex;
@@ -129,11 +130,36 @@ function Signup () {
     }, [isOpenModal]);
 
      // RestAPI POST ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    
+    
+
+
     const RestPost = (data) => {
-        const Restobj = {...data};
-        delete Restobj.pwcheck;
-        Restobj["isEmployee"] = isEmployee;
-        return Restobj;
+        const RestJSON = {...data};
+        delete RestJSON.pwcheck;
+        RestJSON["isEmployee"] = isEmployee;
+
+
+       const axios = require('axios');
+
+       const config = {
+           method: 'post',
+           url: 'http://saltwalks.ddns.net:60072/api/user',
+           headers: { 
+               'Content-Type': 'application/json'
+           },
+           data : JSON.stringify(RestJSON)
+       };
+       
+       axios(config)
+           .then(function (response) {
+           console.log(JSON.stringify(response.data));
+           })
+           .catch(function (error) {
+           console.log(error);
+           alert("회원가입 실패");
+       });
+
     }
 
     const response = {

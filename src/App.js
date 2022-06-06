@@ -3,6 +3,7 @@ import { RecoilRoot } from "recoil";
 import { createGlobalStyle,ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import AppRouter from "./Router";
+//rt Web3 from "web3"
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
