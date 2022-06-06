@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import React, { useState,useCallback } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import Modal from "../Components/Modal";
 import KeyStoreInfo from "../Components/KeyStoreInfo";
 import axios from "axios";
+import injiklogo2 from "../img/injiklogo2.png";
+import { useSetRecoilState } from "recoil";
+import { isLoggedin, isEmploy, keystore } from "../atoms";
+
 
 const Main = styled.main`
     display: flex;
@@ -124,21 +128,21 @@ function Signup () {
     const { register, handleSubmit, formState } = useForm();
     const navigate = useNavigate();
     const [isOpenModal, setOpenModal] = useState(false);
+    const [keyvalue, setKeyvalue] = useState();
+    const setRecoilLogin = useSetRecoilState(isLoggedin);
+    const setRecoilEmployee = useSetRecoilState(isEmploy);
+    const setRecoilkeystore = useSetRecoilState(keystore);
 
     const onClickToggleModal = useCallback(() => {
       setOpenModal(!isOpenModal);
     }, [isOpenModal]);
 
      // RestAPI POST ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    
-    
-
-
     const RestPost = (data) => {
         const RestJSON = {...data};
         delete RestJSON.pwcheck;
-        RestJSON["isEmployee"] = isEmployee;
-
+        RestJSON["is_employee"] = isEmployee;
+        console.log(RestJSON);
 
        const axios = require('axios');
 
@@ -153,23 +157,17 @@ function Signup () {
        
        axios(config)
            .then(function (response) {
-           console.log(JSON.stringify(response.data));
+            console.log(JSON.stringify(response.data));
+                setKeyvalue(response.data.keystore);
            })
            .catch(function (error) {
            console.log(error);
            alert("회원가입 실패");
        });
+       setRecoilLogin(true);
+       setRecoilEmployee(isEmployee);
+       setRecoilkeystore(data.keystore);
 
-    }
-
-    const response = {
-        "error": null,
-        "keystore": {
-            "did": "did:ethr:ropsten:0x02ac49094591d32a4e2f93f3368da2d7d827e987ce6cdb3bd3b8a3390fde8fc33b",
-            "walletAddress": "0xf1232f840f3ad7d23fcdaa84d6c66dac24efb198",
-            "privKey": "d8b595680851765f38ea5405129244ba3cbad84467d190859f4c8b20c1ff6c75",
-            "pubKey": "0x031ef767936996de95f5be7b36fada08d070b97e85d874ce23e5f9fcbdf7149aa2"
-        }   
     }
     //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     
@@ -206,11 +204,11 @@ function Signup () {
             <Main>
                 {isOpenModal && ( 
                     <Modal onClickToggleApplyInfo={onClickToggleModal}>
-                        <KeyStoreInfo keystore={response.keystore}/>
+                        <KeyStoreInfo keystore={keyvalue}/>
                     </Modal>
                 )}
                 <Img
-                src={require("../img/injiklogo2.png")}
+                src={injiklogo2}
                 >
                 </Img>
                 <Type>
@@ -246,7 +244,7 @@ function Signup () {
                 <Info>
                     <PWHeader>정보입력</PWHeader>
                     <InfoItem
-                    {...register("displayName", {required: true})}
+                    {...register("display_name", {required: true})}
                     placeholder="이름">
                     </InfoItem>
                     <InfoItem

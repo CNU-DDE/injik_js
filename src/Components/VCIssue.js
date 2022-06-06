@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import SubHeader from "../Components/SubHeader";
-import MainFooter from "../Components/MainFooter";
+import SubHeader from "./SubHeader";
+import MainFooter from "./MainFooter";
 
 const Main = styled.main`
     width: 100%;
@@ -13,7 +13,7 @@ function VCIssue() {
         <>
         <SubHeader/>
             <Main>
-
+                
             </Main>
         <MainFooter/>
         </>

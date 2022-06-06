@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 //import Map from "../Components/Map";
+import KAKAO from "../img/KAKAO.png";
 
 const Entire = styled.div`
     display: flex;
@@ -14,7 +15,7 @@ const Entire = styled.div`
 `;
 
 const Main = styled.div`
-    min-width: 750px
+    min-width: 750px;
     width: 40%;
     box-shadow: 0 0 8px rgb(0 0 0 / 6%);
     background-color: ${(props) => props.theme.white};
@@ -70,7 +71,7 @@ const MainStoryArea = styled.main`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 800px;
+    height: 500px;
 `;
 
 const MainStoryStory = styled.article`
@@ -147,37 +148,40 @@ function PostInfo() {
                 </MainBack>
                 <MainHeader>
                     <MainHeaderName>
-                        회사이름
+                        KAKAO
                     </MainHeaderName>
                 </MainHeader>
                 <MainCondition>
                     <MainConditionUl>
                         <MainConditionLi>
-                            근무형태: 아르바이트
+                            근무형태: 채용
                         </MainConditionLi>
                         <MainConditionLi>
-                            근무기간: 3년
+                            근무기간: 10년
                         </MainConditionLi>
                         <MainConditionLi>
-                            근무요일,시간: 평일
+                            근무요일,시간: 평일, 09:00 ~ 17:00
                         </MainConditionLi>
                         <MainConditionLi>
-                            급여: 최저시급
+                            급여: 급여협의
                         </MainConditionLi>
                     </MainConditionUl>
                 </MainCondition>
                 <MainStoryArea>
                     <MainStoryStory>
-
+                        <img
+                        style={{width: "100%", objectFit: "scale-down"}}
+                        src={KAKAO}>
+                        </img>
                     </MainStoryStory>
                 </MainStoryArea>
-                <MainWorkingArea>
+                {/* <MainWorkingArea>
             
-                </MainWorkingArea>
+                </MainWorkingArea> */}
                 <MainEmplorerInfo>
                     <MainEmplorerInfoUl>
                         <MainEmplorerInfoLi>
-                            채용담당자: 홍길동
+                            채용담당자: 카카오
                         </MainEmplorerInfoLi>
                         <MainEmplorerInfoLi>
                             H.P: 010-3387-9513

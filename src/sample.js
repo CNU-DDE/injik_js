@@ -260,17 +260,7 @@ export const InternList = [
 export const ResumeList = [
     {
         id: 1,
-        title: "라인 갈래 응애",
-        name: "김해람"
-    },
-    {
-        id: 2,
-        title: "라인 갈래 응애",
-        name: "김해람"
-    },
-    {
-        id: 3,
-        title: "네이버 갈래 응애",
+        title: "KAKAO",
         name: "배성민"
     },
 ];

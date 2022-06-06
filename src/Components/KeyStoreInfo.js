@@ -47,7 +47,7 @@ function KeyStoreInfo({keystore}) {
             </Info>
             <FooterSection>
                 <SubmitButton 
-                text="key값 저장완료"
+                text="저장완료"
                 onClick={SignupClick}/>
             </FooterSection>
         </div>
