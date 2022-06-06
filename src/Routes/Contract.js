@@ -4,6 +4,8 @@ import styled from "styled-components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SubmitButton from "../Components/SubmitButton";
+import person1 from "../img/person1.png";
+import person2 from "../img/person2.png";
 
 const Entire = styled.div`
     display: flex;
@@ -126,7 +128,7 @@ function Contract() {
     const navigate = useNavigate();
 
     const returnClick = () => {
-        navigate(-1);
+        navigate("/");
     }
      
     return (
@@ -138,17 +140,17 @@ function Contract() {
                 </Back>
                 <PersonInfo> 
                     <Info>
-                        <PersonImg src={require("../img/person1.png")}/>
-                        <span>이름</span>
-                        <span>전화번호</span>
-                        <span>이메일</span>
+                        <PersonImg src={person1}/>
+                        <span>배성민</span>
+                        <span>010-7722-1234</span>
+                        <span>abc@gmail.com</span>
                     </Info>
                     <Split/>
                     <Info>
-                        <PersonImg src={require("../img/person2.png")}/>
-                        <span>이름</span>
-                        <span>전화번호</span>
-                        <span>이메일</span>
+                        <PersonImg src={person2}/>
+                        <span>카카오</span>
+                        <span>010-3387-9513</span>
+                        <span>qo98333@naver.com</span>
                     </Info>
                 </PersonInfo>
                 <ContractInfo>

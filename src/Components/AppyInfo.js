@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SubmitButton from "./SubmitButton";
 import { ResumeList } from "../sample";
+import { useNavigate } from "react-router";
 
 const Main = styled.main`
     height: 100%;
@@ -84,8 +85,14 @@ const Footer = styled.footer`
     align-items: center;
     margin: 40px 0;
 `;
- 
+
 function ApplyInfo() {
+    const navigate = useNavigate();
+
+    const ContractClick = () => {
+        navigate("/Full/3/contract");
+    }
+
     return(
         <Main>
             <Header>
@@ -93,10 +100,10 @@ function ApplyInfo() {
             </Header>
             <Info>
                 <InfoItems>
-                    <li><span>이름</span></li>
-                    <li><span>전화번호</span></li>
-                    <li><span>메일</span></li>
-                    <li><span>주소</span></li>
+                    <li><span>이름 배성민</span></li>
+                    <li><span>전화번호 010-7722-1234</span></li>
+                    <li><span>메일 abc@naver.com</span></li>
+                    <li><span>주소 대전광역시</span></li>
                 </InfoItems>
             </Info>
             <CoverLetter>
@@ -123,7 +130,10 @@ function ApplyInfo() {
                 </ul>
             </Career>
             <Footer>
-                <SubmitButton text="계약"></SubmitButton>
+                <SubmitButton 
+                text="계약"
+                onClick={ContractClick}
+                ></SubmitButton>
             </Footer>
         </Main>
     );

@@ -2,8 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import SubHeader from "../Components/SubHeader";
 import MainFooter from "../Components/MainFooter";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { isLoggedin, isEmploy, keystore } from "../atoms";
+import { useSetRecoilState } from "recoil";
+
 
 const Main = styled.main`
     margin: 0 auto;
@@ -115,11 +118,38 @@ const LoginAlterfind = styled(Link)`
 
 function Signin() {
     const { register, handleSubmit, formState, setError, } = useForm();
+    const navigate = useNavigate();
+    const setRecoilLogin = useSetRecoilState(isLoggedin);
+    const setRecoilEmployee = useSetRecoilState(isEmploy);
+    const setRecoilkeystore = useSetRecoilState(keystore);
     
     // RestAPI POST ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     const onValid = (data) => {
-        console.log(data);
+        data.keystore = JSON.parse(data.keystore);
+        const axios = require('axios'); 
+        axios.default.withCredentials = true;   
+        const config = {
+            method: 'post',
+            url: 'http://saltwalks.ddns.net:60072/api/user/token',
+            headers: { 
+                'Content-Type': 'application/json',
+            },
+            data : JSON.stringify(data),
+            };
+    
+            axios(config)
+            .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            console.log(document.cookie)
+            navigate("/");
+            })
+            .catch(function (error) {
+            console.log(error);
+        });
+        setRecoilLogin(true);
+        //setRecoilEmployee(isEmployee);
     };
+
     //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     return(
         <>
@@ -139,11 +169,12 @@ function Signin() {
                 <div>
                 <LoginInput onSubmit={handleSubmit(onValid)}>
                     <LoginInputid
-                    {...register("key", {required: true})}
+                    {...register("keystore", {required: true})}
                     placeholder="key값"></LoginInputid>
                     <LoginInputpw
                     {...register("password", {required: true})}
-                    placeholder="비밀번호"></LoginInputpw>
+                    placeholder="비밀번호"
+                    type="password"></LoginInputpw>
                     <LoginInputbutton>로그인</LoginInputbutton>
                 </LoginInput>
                 </div>

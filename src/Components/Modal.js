@@ -48,6 +48,6 @@ const Backdrop = styled.div`
   top: 0;
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.6);
-`;
+`; 
 
 export default Modal;

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import logo from "../img/injiklogo.png";
 import searchicon from "../img/searchicon.png";
+import { isLoggedin, isEmploy } from "../atoms";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 const UlParent = styled.ul`
     list-style: none;
@@ -160,13 +162,16 @@ const MenuLi = styled.li`
 
 function MainHeader() {
     const navigate = useNavigate();
-    const [isLogined, setIsLogined] = useState(false);
+    const [isLogined, setIsLogined] = useState(true);
     const [isEmployee, setIsEmployee] = useState(true);
     const { register, watch } = useForm();
     const [start, setStart] = useState([0,0,0,0,0,0]);
     const [end, setEnd] = useState([0,0,0,0,0,0]);
     const [isStart, setIsStart] = useState(false);
     const [isEnd, setIsEnd] = useState(false)
+    const RecoilLogin = useRecoilValue(isLoggedin);
+    const RecoilEmploy = useRecoilValue(isEmploy);
+    const setRecoilLogin = useSetRecoilState(isLoggedin);
 
     const WorkStart = () => {
         let today = new Date();
@@ -203,7 +208,7 @@ function MainHeader() {
     }
     
     const toResume = () => {
-        if(isLogined) {
+        if(RecoilLogin) {
             navigate("/DrawResume");
         } else {
             alert("로그인이 필요합니다.");
@@ -212,7 +217,7 @@ function MainHeader() {
     }
     
     const toPost = () => {
-        if(isLogined) {
+        if(RecoilLogin) {
             navigate("/DrawPost");
         } else {
             alert("로그인이 필요합니다.");
@@ -224,21 +229,21 @@ function MainHeader() {
         setIsLogined(prev => !prev);
     }
 
+    const logoutClick = () => {
+        setRecoilLogin(false);
+    }
+
     return (
         <Header>
             <Search>
                 <Sign>
                     <SignUl>
-                    <button
-                        onClick={temp}>asdf</button>
-                        { isLogined ?
+                        { RecoilLogin ?
                         <SignLi>
-                            <Link
-                            to="/"
-                            style={{ textDecoration: 'none'}}
-                            >
+                            <button
+                            onClick={logoutClick}>
                                 <span>로그아웃</span>
-                            </Link>
+                            </button>
 
                         </SignLi>      
                         : 
@@ -254,7 +259,7 @@ function MainHeader() {
                         <SignLi>
                             <span style={{opacity: 0.2}}>│</span>
                         </SignLi>
-                        { isLogined ?
+                        { RecoilLogin ?
                         <SignLi>
                             <Link
                             to="/MyPage"
