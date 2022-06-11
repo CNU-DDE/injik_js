@@ -259,7 +259,7 @@ function MainHeader() {
                         <SignLi>
                             <span style={{opacity: 0.2}}>│</span>
                         </SignLi>
-                        { RecoilLogin ?
+                        { true ?
                         <SignLi>
                             <Link
                             to="/MyPage"
