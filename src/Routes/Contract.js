@@ -130,6 +130,11 @@ function Contract() {
     const returnClick = () => {
         navigate("/");
     }
+
+    const SubmitClick = () => {
+        alert("계약되었습니다.");
+        navigate("/");
+    }
      
     return (
         <Entire>
@@ -148,9 +153,9 @@ function Contract() {
                     <Split/>
                     <Info>
                         <PersonImg src={person2}/>
-                        <span>카카오</span>
-                        <span>010-3387-9513</span>
-                        <span>qo98333@naver.com</span>
+                        <span>kakao</span>
+                        <span>010-1234-5678</span>
+                        <span>KAKAO@naver.com</span>
                     </Info>
                 </PersonInfo>
                 <ContractInfo>
@@ -164,7 +169,9 @@ function Contract() {
                     </Input>
                 </ContractInfo>
                 <Submit>
-                    <SubmitButton text="계약하기"/>
+                    <SubmitButton 
+                    text="계약하기"
+                    onClick={SubmitClick}/>
                 </Submit>
                 {/* <ImgSection>  
                     <Img src={require("../img/contract.jpeg")}/>

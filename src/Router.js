@@ -9,7 +9,6 @@ import SearchInfo from "./Routes/SearchInfo";
 import Contract from "./Routes/Contract";
 import MyPage from "./Routes/MyPage";
 
-
 const AppRouter = () => {
     return (
         <Router>

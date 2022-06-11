@@ -9,9 +9,10 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
-    <RecoilRoot>
-      <App />
-    </RecoilRoot>
-  </React.StrictMode>
+  // swiper 사용을 위해 StrickMode 주석처리
+  // <React.StrictMode>
+     <RecoilRoot>
+       <App />
+     </RecoilRoot>
+  // </React.StrictMode>
 );
