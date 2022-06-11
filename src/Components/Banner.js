@@ -6,6 +6,7 @@ import "swiper/components/pagination/pagination.scss";
 import mention from "../img/mention.png";
 import career2 from "../img/career2.png";
 import styled from "styled-components";
+import { useNavigate } from 'react-router';
 
 const SubMainImg = styled.img`
     position: relative;
@@ -22,7 +23,7 @@ const SubMainMent = styled.img`
 
 function Banner() {
   SwiperCore.use([Navigation, Pagination, Autoplay]);
-
+  const navigate = useNavigate();
 
   return(
       <Swiper
@@ -31,15 +32,15 @@ function Banner() {
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 1000}}	// 추가
+        autoplay={{ delay: 5000}}	// 추가
         modules={[Autoplay, Pagination, Navigation]}
         style={{
           height: "300px",
           width: "900px",
-          minWidth: ""
         }}
       >
         <SwiperSlide
+
         style={{
           display: "flex",
           flexDirection: "column",
@@ -53,7 +54,16 @@ function Banner() {
             >
             </SubMainMent>
         </SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
+        <SwiperSlide>
+          <button
+          onClick={() => {navigate("/VCIssue")}}
+          style={{
+            width: "100%",
+            height: "100%",
+          }}>
+
+          </button>
+        </SwiperSlide>
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>
       </Swiper>

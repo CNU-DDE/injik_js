@@ -8,6 +8,7 @@ import DrawPost from "./Routes/DrawPost";
 import SearchInfo from "./Routes/SearchInfo";
 import Contract from "./Routes/Contract";
 import MyPage from "./Routes/MyPage";
+import VCIssue from "./Routes/VCIssue";
 
 const AppRouter = () => {
     return (
@@ -20,6 +21,7 @@ const AppRouter = () => {
                 <Route path="/DrawPost" element={<DrawPost/>}></Route>
                 <Route path="/:cata/:no" element={<PostInfo/>}></Route>
                 {/* <Route path="/:brandname" element={<SearchInfo/>}></Route> */}
+                <Route path="/VCIssue" element={<VCIssue/>}></Route>
                 <Route path="/MyPage" element={<MyPage/>}></Route>
                 <Route path="/:cata/:no/Contract" element={<Contract/>}></Route>
             </Routes>        
