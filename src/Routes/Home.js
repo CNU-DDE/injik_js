@@ -115,7 +115,7 @@ function Home() {
         <Main>
             <MainFullTime>
                 <CataName>
-                    <MainHeaderName>채용</MainHeaderName>
+                    {/* <MainHeaderName>채용</MainHeaderName> */}
                 </CataName>
                 <MainFullTimeList>
                     {FullTimeList.map(element => (
@@ -139,7 +139,7 @@ function Home() {
             </MainFullTime>
             <MainPartTime>
                 <CataName>
-                    <MainHeaderName>아르바이트</MainHeaderName>
+                    {/* <MainHeaderName>아르바이트</MainHeaderName> */}
                 </CataName>
                 <MainPartTimeList>
                     {PartTimeList.map(element => (
@@ -161,7 +161,7 @@ function Home() {
             </MainPartTime>
             <MainIntern>
                 <CataName>
-                    <MainHeaderName>인턴</MainHeaderName>
+                    {/* <MainHeaderName>인턴</MainHeaderName> */}
                 </CataName>
                 <HomeInternList>
                     {InternList.map(element => (

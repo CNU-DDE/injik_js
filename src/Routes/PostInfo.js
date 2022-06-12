@@ -11,6 +11,7 @@ const Entire = styled.div`
     align-items: center;
     width: 100%;
     min-height: 1000px;
+    height: 100vh;
     background-color: ${(props) => props.theme.white1};
 `;
 
@@ -71,7 +72,6 @@ const MainStoryArea = styled.main`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 500px;
 `;
 
 const MainStoryStory = styled.article`
@@ -171,7 +171,9 @@ function PostInfo() {
                     <MainStoryStory>
                         <img
                         style={{width: "100%", objectFit: "scale-down"}}
-                        src={KAKAO}>
+                        src={KAKAO}
+                        alt=""
+                        >
                         </img>
                     </MainStoryStory>
                 </MainStoryArea>

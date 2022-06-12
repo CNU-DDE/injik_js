@@ -36,7 +36,7 @@ const Button2 = styled.button`
   }
 `;
 
-const BannerSection3 = styled.div`
+const BannerSection = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
@@ -82,22 +82,24 @@ function Banner() {
           </Button2>
         </SwiperSlide>
         <SwiperSlide>
-          <BannerSection3>
+          <BannerSection>
             <img src={Banner2} alt="Banner2"
             style={{
               height: "80%",
               objectFit: "scale-down",
             }}/>
-          </BannerSection3>
+          </BannerSection>
         </SwiperSlide>
         <SwiperSlide>
-          <BannerSection3>
+          <BannerSection>
             <img src={Banner3} alt="Banner3"
             style={{
-              height: "90%",
+              height: "80%",
               objectFit: "scale-down",
+              boxShadow: "0 0 8px rgb(0 0 0 / 20%)",
+              borderRadius: "10px",
             }}/>
-          </BannerSection3>
+          </BannerSection>
         </SwiperSlide>
       </Swiper>
   )

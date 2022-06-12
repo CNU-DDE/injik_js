@@ -48,7 +48,7 @@ export const FullTimeList = [
         info: "소프트웨어 엔지니어 채용",
     },
     {
-        name: "POSCO",
+        name: "BURBERRY",
         cata: "Full",
         no: 9,
         info: "부분별 경력/신입 수시 채용",
@@ -72,13 +72,13 @@ export const FullTimeList = [
         info: "회계 경력직 채용",
     },
     {
-        name: "SONY",
+        name: "CARTIER",
         cata: "Full",
         no: 13,
         info: "2022 상반기 채용공고",
     },
     {
-        name: "EBAY",
+        name: "YOUTUBE",
         cata: "Full",
         no: 14,
         info: "IT분야 상시 채용",

@@ -233,6 +233,15 @@ function MainHeader() {
         setRecoilLogin(false);
     }
 
+    const toVCIssue = () => {
+        if(true) {
+            navigate("/VCIssue");
+        } else {
+            alert("로그인이 필요합니다.");
+            navigate("/Signin");
+        }    
+    }
+
     return (
         <Header>
             <Search>
@@ -259,7 +268,7 @@ function MainHeader() {
                         <SignLi>
                             <span style={{opacity: 0.2}}>│</span>
                         </SignLi>
-                        { true ?
+                        { false ?
                         <SignLi>
                             <Link
                             to="/MyPage"
@@ -309,8 +318,8 @@ function MainHeader() {
                             <span>커뮤니티</span>
                         </MenuLi>
                         <MenuLi>
-                            { isEmployee &&
-                            <button onClick={toResume}>
+                            { true &&
+                            <button onClick={toVCIssue}>
                                 <span>경력발급</span>
                             </button>
                             }
