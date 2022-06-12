@@ -85,6 +85,7 @@ const LoginInputbutton = styled.button`
     font-weight: 600;
     grid-row: 1 / 3;
     grid-column: 2 / 3;
+    width: 85px;
     &:hover {
       cursor: pointer;
     }

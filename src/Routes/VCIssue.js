@@ -5,6 +5,7 @@ import MainFooter from "../Components/MainFooter";
 import Select from "react-select";
 import { useForm } from "react-hook-form";
 import SubmitButton from "../Components/SubmitButton";
+import { useNavigate } from "react-router";
 
 const Entire = styled.div`
     width: 100%;
@@ -18,7 +19,7 @@ const Main = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 30px;
+    margin: 100px;
     width: 730px;
     height: 100%;
     padding: 30px 40px;
@@ -83,6 +84,8 @@ const Footer = styled.footer`
 `;
 
 function VCIssue() {
+    const navigate = useNavigate();
+
     const {
         register,  
         handleSubmit, 
@@ -90,7 +93,7 @@ function VCIssue() {
         setError,
     } = useForm();
     
-    const [issuer, setIssuer] = useState();
+    const [issuer, setIssuer] = useState("");
     
     const IssuerSelect = (option) => {
         setIssuer(option.value);
@@ -118,7 +121,8 @@ function VCIssue() {
         PostJSON.title = data.title;
         PostJSON.claim = tempObj;
         console.log(PostJSON);
-        alert("발급완료");
+        alert("요청되었습니다.");
+        navigate("/");
     }
     //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -147,13 +151,19 @@ function VCIssue() {
                         <Info>
                             <span>시작날짜</span>
                         <Input
-                        {...register("from", {required: true,})}
+                        {...register("from", {
+                            required: true,
+                            pattern: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/
+                        })}
                         placeholder="ex) 2012-03-12"></Input>
                         </Info>
                         <Info>
                             <span>종료날짜</span>
                         <Input
-                        {...register("to", {required: true,})}
+                        {...register("to", {
+                            required: true,
+                            pattern: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/
+                        })}
                         placeholder="ex) 2015-12-23"></Input>
                         </Info>
                         <Info>
@@ -170,7 +180,7 @@ function VCIssue() {
                         </Info>      
                     <Footer>
                         <SubmitButton
-                        text="발급"/>
+                        text="요청"/>
                     </Footer>
                     </Form>
                 </Main>      

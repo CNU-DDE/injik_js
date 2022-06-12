@@ -175,23 +175,23 @@ function MyPage() {
                         {isApplyList ?
                         <MenuLi>
                             <ClickMenuButton
-                            onClick={ApplyClick}>지원목록</ClickMenuButton>
+                            onClick={ApplyClick}>{false ? <span>지원내역</span>:<span>지원자목록</span>}</ClickMenuButton>
                         </MenuLi>
                         :
                         <MenuLi>
                             <MenuButton
-                            onClick={ApplyClick}>지원목록</MenuButton>
+                            onClick={ApplyClick}>{false ? <span>지원내역</span>:<span>지원자목록</span>}</MenuButton>
                         </MenuLi>
                         }
                         {isVCList ?
                         <MenuLi>
                             <ClickMenuButton
-                            onClick={VCClick}>경력발급</ClickMenuButton>
+                            onClick={VCClick}>{false ? <span>경력요청내역</span>:<span>경력요청함</span>}</ClickMenuButton>
                         </MenuLi>
                         :
                         <MenuLi>
                             <MenuButton
-                            onClick={VCClick}>경력발급</MenuButton>
+                            onClick={VCClick}>{false ? <span>경력요청내역</span>:<span>경력요청함</span>}</MenuButton>
                         </MenuLi>
                         }
                         <MenuLi>
@@ -227,7 +227,7 @@ function MyPage() {
                 }
                 { isVCList &&
                     <Request> 
-                        <VCRequest/>
+                        {/* <VCRequest/> */}
                     </Request>  
                 }
                 </List>  
