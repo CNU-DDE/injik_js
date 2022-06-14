@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router';
 import Banner1 from "../img/Banner1.png";
 import Banner2 from "../img/Banner2.png";
 import Banner3 from "../img/Banner3.png";
+import { useRecoilValue } from 'recoil';
+import { isLoggedinAtom } from '../atoms';
 
 const SubMainImg = styled.img`
     position: relative;
@@ -47,6 +49,16 @@ const BannerSection = styled.div`
 function Banner() {
   SwiperCore.use([Navigation, Pagination, Autoplay]);
   const navigate = useNavigate();
+  const isLoggined = useRecoilValue(isLoggedinAtom);
+
+  const Banner2Click = () => {
+    if(isLoggined) {
+      navigate("/VCIssue");
+    } else {
+      alert("로그인이 필요합니다.");
+      navigate("/Signin");
+    }
+  }
 
   return(
       <Swiper
@@ -77,7 +89,7 @@ function Banner() {
             </SubMainMent>
         </SwiperSlide>
         <SwiperSlide>
-          <Button2 onClick={() => {navigate("/VCIssue")}}>
+          <Button2 onClick={Banner2Click}>
             <img src={Banner1} alt="Banner2"/>
           </Button2>
         </SwiperSlide>

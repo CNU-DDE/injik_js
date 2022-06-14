@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SubHeader from "../Components/SubHeader";
 import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
@@ -8,6 +8,9 @@ import { useForm } from "react-hook-form";
 import SubmitButton from "../Components/SubmitButton";
 import officalImg2 from "../img/officalImg2.png";
 import InputBox from "../Components/InputBox";
+import { useNavigate } from "react-router";
+import { useRecoilValue } from "recoil";
+import { isLoggedinAtom } from "../atoms";
 
 const Entire = styled.div`
     display: flex;
@@ -185,6 +188,15 @@ function DrawPost() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const { register, handleSubmit, formState } = useForm();
+    const isLoggedin = useRecoilValue(isLoggedinAtom);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!isLoggedin) {
+            alert("로그인이 필요합니다");
+            navigate("/Signin");
+        }
+    },[]);
 
     const allFalse = () => {
         setIsFull(false);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import SubmitButton from "../Components/SubmitButton";
 import person1 from "../img/person1.png";
 import person2 from "../img/person2.png";
+import { useRecoilValue } from "recoil";
+import { isLoggedinAtom } from "../atoms";
 
 const Entire = styled.div`
     display: flex;
@@ -126,6 +128,14 @@ const Submit = styled.div`
 function Contract() {
     const params = useParams();
     const navigate = useNavigate();
+    const isLoggedin = useRecoilValue(isLoggedinAtom);
+
+    useEffect(() => {
+        if(!isLoggedin) {
+            alert("로그인이 필요합니다");
+            navigate("/Signin");
+        }
+    },[]);
 
     const returnClick = () => {
         navigate("/");
