@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import logo from "../img/injiklogo.png";
 import searchicon from "../img/searchicon.png";
-import { isLoggedin, isEmploy } from "../atoms";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { isLoggedinAtom, isEmployAtom, keystoreAtom } from "../atoms";
+import { useRecoilValue, useSetRecoilState, useResetRecoilState, useRecoilState} from "recoil";
 
 const UlParent = styled.ul`
     list-style: none;
@@ -162,40 +162,9 @@ const MenuLi = styled.li`
 
 function MainHeader() {
     const navigate = useNavigate();
-    const [isLogined, setIsLogined] = useState(true);
-    const [isEmployee, setIsEmployee] = useState(true);
-    const { register, watch } = useForm();
-    const [start, setStart] = useState([0,0,0,0,0,0]);
-    const [end, setEnd] = useState([0,0,0,0,0,0]);
-    const [isStart, setIsStart] = useState(false);
-    const [isEnd, setIsEnd] = useState(false)
-    const RecoilLogin = useRecoilValue(isLoggedin);
-    const RecoilEmploy = useRecoilValue(isEmploy);
-    const setRecoilLogin = useSetRecoilState(isLoggedin);
-
-    const WorkStart = () => {
-        let today = new Date();
-        let year = today.getFullYear(); // 년도
-        let month = today.getMonth() + 1;  // 월
-        let day = today.getDay();  // 요일
-        let hours = today.getHours(); // 시
-        let minutes = today.getMinutes();  // 분
-        let seconds = today.getSeconds();  // 초
-        setStart([year,month,day,hours,minutes,seconds]);
-        setIsStart((prev) => !prev);
-      }
-    
-      const WorkEnd = () => {
-        let today = new Date();
-        let year = today.getFullYear(); // 년도
-        let month = today.getMonth() + 1;  // 월
-        let day = today.getDay();  // 요일
-        let hours = today.getHours(); // 시
-        let minutes = today.getMinutes();  // 분
-        let seconds = today.getSeconds();  // 초
-        setEnd([year,month,day,hours,minutes,seconds]);
-        setIsEnd((prev) => !prev);
-      }
+    const [isLoggedin, setIsLogined] = useRecoilState(isLoggedinAtom);
+    const [isEmploy, setIsEmploy] = useRecoilState(isEmployAtom);
+    const [keystore, setKeystore] = useRecoilState(keystoreAtom);
 
     const reload = () => {
         navigate("/");
@@ -208,7 +177,7 @@ function MainHeader() {
     }
     
     const toResume = () => {
-        if(RecoilLogin) {
+        if(isLoggedin) {
             navigate("/DrawResume");
         } else {
             alert("로그인이 필요합니다.");
@@ -217,7 +186,7 @@ function MainHeader() {
     }
     
     const toPost = () => {
-        if(RecoilLogin) {
+        if(isLoggedin) {
             navigate("/DrawPost");
         } else {
             alert("로그인이 필요합니다.");
@@ -230,11 +199,13 @@ function MainHeader() {
     }
 
     const logoutClick = () => {
-        setRecoilLogin(false);
+        setIsLogined(false);
+        setIsEmploy(false);
+        setKeystore("");
     }
 
     const toVCIssue = () => {
-        if(true) {
+        if(isLoggedin) {
             navigate("/VCIssue");
         } else {
             alert("로그인이 필요합니다.");
@@ -247,7 +218,7 @@ function MainHeader() {
             <Search>
                 <Sign>
                     <SignUl>
-                        { RecoilLogin ?
+                        { isLoggedin ?
                         <SignLi>
                             <button
                             onClick={logoutClick}>
@@ -268,7 +239,7 @@ function MainHeader() {
                         <SignLi>
                             <span style={{opacity: 0.2}}>│</span>
                         </SignLi>
-                        { false ?
+                        { isLoggedin ?
                         <SignLi>
                             <Link
                             to="/MyPage"
@@ -318,11 +289,9 @@ function MainHeader() {
                             <span>커뮤니티</span>
                         </MenuLi>
                         <MenuLi>
-                            { true &&
                             <button onClick={toVCIssue}>
                                 <span>경력발급</span>
                             </button>
-                            }
                         </MenuLi>
                     </MenuUl>
                     <MenuUl>
