@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SubHeader from "../Components/SubHeader";
 import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
@@ -7,6 +7,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import SubmitButton from "../Components/SubmitButton";
 import officalImg2 from "../img/officalImg2.png";
+import InputBox from "../Components/InputBox";
+import { useNavigate } from "react-router";
+import { useRecoilValue } from "recoil";
+import { isLoggedinAtom } from "../atoms";
 
 const Entire = styled.div`
     display: flex;
@@ -21,7 +25,7 @@ const Mainbg = styled.div`
     justify-content: center;
     align-items: center;
     margin: 30px;
-    width: 730px;
+    min-width: 730px;
     height: 100%;
     border: 1px solid #eee;
     background-color: ${(props) => props.theme.white};
@@ -40,6 +44,7 @@ const Header = styled.header`
     font-weight: bold;
     letter-spacing: -2;
     border-bottom: 2px solid #333;
+    margin-top: 12px;
 `;
 
 const MainCata = styled.section`
@@ -69,6 +74,7 @@ const MainCataButtonCli = styled(MainCataButton)`
 `;
 
 const MainTitle = styled.section`
+    height: 100%;
 `;
 
 const MainInput = styled.input`
@@ -135,21 +141,17 @@ const FullImgdiv = styled.div`
 `;
 
 const Condition = styled.ul`
-    margin-top: 15px;
+    height: 100%;
 `;
 
 
 const ConditionItem = styled.li`
-    padding: 10px;
+    margin: 10px;
     span {
         color: ${(props) => props.theme.deepnavy};
         font-size: 17px;
         font-weight: bold;
         margin-right: 10px;
-    }
-    input {
-        border: 0;
-        border-bottom: 1px solid ${(props) => props.theme.gray};
     }
 `;
 
@@ -186,6 +188,15 @@ function DrawPost() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const { register, handleSubmit, formState } = useForm();
+    const isLoggedin = useRecoilValue(isLoggedinAtom);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!isLoggedin) {
+            alert("로그인이 필요합니다");
+            navigate("/Signin");
+        }
+    },[]);
 
     const allFalse = () => {
         setIsFull(false);
@@ -261,29 +272,30 @@ function DrawPost() {
                         src={officalImg2}/>
                         <nav>
                             <Condition>
-                                <ConditionItem>
+                                <ConditionItem
+                                style={{marginTop: "20px"}}>
                                     <span>근무기간</span>
-                                    <input
+                                    <InputBox
                                     {...register("employment_period", {required: true})}/>
                                 </ConditionItem>
                                 <ConditionItem>
                                     <span>근무시간</span>
-                                    <input
+                                    <InputBox
                                     {...register("working_time", {required: true})}/>
                                 </ConditionItem>
                                 <ConditionItem>
                                     <span>급여종류</span>
-                                    <input
+                                    <InputBox
                                     {...register("payment_interval_type", {required: true})}/>
                                 </ConditionItem>
                                 <ConditionItem>
                                     <span>급여금액</span>
-                                    <input
+                                    <InputBox
                                     {...register("payment_per_interval", {required: true})}/>
                                 </ConditionItem>
                                 <ConditionItem>
                                     <span>모집인원</span>
-                                    <input
+                                    <InputBox
                                     {...register("hiring_number", {required: true})}/>
                                 </ConditionItem>
                             </Condition>

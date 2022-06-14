@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SubHeader from "../Components/SubHeader";
 import MainFooter from "../Components/MainFooter";
@@ -6,6 +6,8 @@ import Select from "react-select";
 import { useForm } from "react-hook-form";
 import SubmitButton from "../Components/SubmitButton";
 import { useNavigate } from "react-router";
+import { useRecoilValue } from "recoil";
+import { isLoggedinAtom } from "../atoms";
 
 const Entire = styled.div`
     width: 100%;
@@ -85,7 +87,6 @@ const Footer = styled.footer`
 
 function VCIssue() {
     const navigate = useNavigate();
-
     const {
         register,  
         handleSubmit, 
@@ -94,7 +95,14 @@ function VCIssue() {
     } = useForm();
     
     const [issuer, setIssuer] = useState("");
-    
+    const isLoggedin = useRecoilValue(isLoggedinAtom);
+
+    useEffect(() => {
+        if(!isLoggedin) {
+            alert("로그인이 필요합니다");
+            navigate("/Signin");
+        }
+    },[]);
     const IssuerSelect = (option) => {
         setIssuer(option.value);
     }

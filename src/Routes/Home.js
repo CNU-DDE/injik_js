@@ -6,6 +6,8 @@ import styled from "styled-components";
 import MainHeader from "../Components/MainHeader";
 import MainFooter from "../Components/MainFooter";
 import Banner from "../Components/Banner";
+import { isLoggedinAtom } from "../atoms";
+import { useRecoilValue } from "recoil";
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Main 
 const Main = styled.main`
@@ -104,7 +106,7 @@ const HomeInternList = styled.ul`
 
 
 function Home() {
-    const [isLogined, setIsLogined] = useState(true);
+    const isLoggined = useRecoilValue(isLoggedinAtom);
 
     return (
         <>

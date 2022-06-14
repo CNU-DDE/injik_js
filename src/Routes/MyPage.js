@@ -1,12 +1,14 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import MainHeader from "../Components/MainHeader";
 import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
 import { ResumeList } from "../sample";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "../Components/Modal";
 import ApplyInfo from "../Components/AppyInfo";
 import VCRequest from "../Components/VCRequest";
+import { useRecoilValue } from "recoil";
+import { isLoggedinAtom } from "../atoms";
 
 const Entire = styled.div`
     width: 100%;
@@ -139,6 +141,15 @@ function MyPage() {
     const [isOpenModal, setOpenModal] = useState(false);
     const [isApplyList, setIsApplyList] = useState(true);
     const [isVCList, setIsVCList] = useState(false);
+    const isLoggedin = useRecoilValue(isLoggedinAtom);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!isLoggedin) {
+            alert("로그인이 필요합니다");
+            navigate("/Signin");
+        }
+    },[]);
 
     const onClickToggleModal = useCallback(() => {
       setOpenModal(!isOpenModal);

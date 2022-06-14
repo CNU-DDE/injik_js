@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { isLoggedinAtom } from "../atoms";
 //import Map from "../Components/Map";
 import KAKAO from "../img/KAKAO.png";
 
@@ -129,7 +131,14 @@ const MainBottomButton = styled.button`
 function PostInfo() {
     const navigate = useNavigate();
     const params = useParams();
-    console.log(params);
+    const isLoggedin = useRecoilValue(isLoggedinAtom);
+
+    useEffect(() => {
+        if(!isLoggedin) {
+            alert("로그인이 필요합니다");
+            navigate("/Signin");
+        }
+    },[]);    
 
     const returnClick = () => {
         navigate("/");
