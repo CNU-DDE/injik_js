@@ -257,10 +257,78 @@ export const InternList = [
     },
 ];
 
-export const ResumeList = [
+export const ResumeList = {
+    "error": null,
+    "claims": [
+        {
+            "id": "62ac67e42115077998f1247b",
+            "title": "hello",
+            "holder": "did:ethr:ropsten:0x03277c363b9844bcf27ef740f0024246ecee5f942c908611ae716ac6aed4737325"
+        },
+        {
+            "id": "62ac69a02115077998f1247d",
+            "title": "hello",
+            "holder": "did:ethr:ropsten:0x03277c363b9844bcf27ef740f0024246ecee5f942c908611ae716ac6aed4737325"
+        },
+        {
+            "id": "62ac69cd2115077998f1247f",
+            "title": "hello",
+            "holder": "did:ethr:ropsten:0x03277c363b9844bcf27ef740f0024246ecee5f942c908611ae716ac6aed4737325"
+        }
+    ]
+}
+
+export const EmployerCareerList = {
+    "error": null,
+    "claims": [
+        {
+            "id": "62a73aad06cc0803c546b90a",
+            "holder": "did:ethr:ropsten:0x03c279a56d2422ca21b9bccc806ef0b6ac0b2085c391c39278b4fe68d591f63db1",
+            "title": "aloha"
+        },
+        {
+            "id": "62a73e530a790860abf8943b",
+            "holder": "did:ethr:ropsten:0x03c279a56d2422ca21b9bccc806ef0b6ac0b2085c391c39278b4fe68d591f63db1",
+            "title": "aloha"
+        }
+    ]
+}
+
+
+export const EmployeeCareerList = [
     {
-        id: 1,
-        title: "KAKAO",
-        name: "배성민"
-    },
-];
+        "error": null,
+        "claims": [
+            {
+                "id": "62ab443e203e77150d00f897",
+                "issuer": "did:ethr:ropsten:0x03c279a56d2422ca21b9bccc806ef0b6ac0b2085c391c39278b4fe68d591f63db1",
+                "title": "aloha",
+                "status": 1
+            },
+            {
+                "id": "62ab4794266120686664f9ae",
+                "issuer": "did:ethr:ropsten:0x03c279a56d2422ca21b9bccc806ef0b6ac0b2085c391c39278b4fe68d591f63db1",
+                "title": "aloha",
+                "status": 1
+            },
+            {
+                "id": "62ab4ed7309366d8b23f7742",
+                "issuer": "did:ethr:ropsten:0x03c279a56d2422ca21b9bccc806ef0b6ac0b2085c391c39278b4fe68d591f63db1",
+                "title": "aloha",
+                "status": 1
+            },
+            {
+                "id": "62ab534adea369fd638ce717",
+                "issuer": "did:ethr:ropsten:0x03c279a56d2422ca21b9bccc806ef0b6ac0b2085c391c39278b4fe68d591f63db1",
+                "title": "aloha",
+                "status": 1
+            },
+            {
+                "id": "62abe6caf2d51b0116c5e080",
+                "issuer": "did:ethr:ropsten:0x03c279a56d2422ca21b9bccc806ef0b6ac0b2085c391c39278b4fe68d591f63db1",
+                "title": "aloha",
+                "status": 1
+            }
+        ]
+    }
+]

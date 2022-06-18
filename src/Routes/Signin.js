@@ -140,19 +140,19 @@ function Signin() {
                 'Content-Type': 'application/json',
             },
             data : JSON.stringify(data),
-            };
+        };
     
-            axios(config)
-            .then(function (response) {
+        axios(config)
+        .then(function (response) {
             console.log(JSON.stringify(response.data));
             //console.log(document.cookie)
             setIsLogined(true);
             // setIsEmploy(data.); keystore로 회원정보 가져와야댐 !!!!!!!!!!!!!!!
             setKeystore(JSON.stringify(data.keystore));
             navigate("/");
-            })
-            .catch(function (error) {
-            console.log(error);
+        })
+        .catch(function (error) {
+            alert("로그인에 실패하였습니다. 등록되지 않은 아이디거나\n, 아이디 또는 비밀번호가 일치하지 않습니다.");
         });
     };
 

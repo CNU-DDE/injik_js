@@ -1,23 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-function Modal({ onClickToggleApplyInfo, children}) {
-  return (
-    <Entire>
-      <DialogBox>{children}</DialogBox>
-      <Backdrop
-        onClick={(e) => {
-          e.preventDefault();
-
-          if(onClickToggleApplyInfo) {
-            onClickToggleApplyInfo();
-          }
-        }}
-      />
-    </Entire>
-  );
-}
-
 const Entire = styled.div`
   width: 100%;
   height: 100%;
@@ -49,5 +32,22 @@ const Backdrop = styled.div`
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.6);
 `; 
+
+
+function Modal({ onClickToggleApplyInfo, children}) {
+  return (
+    <Entire>
+      <DialogBox>{children}</DialogBox>
+      <Backdrop
+        onClick={(e) => {
+          e.preventDefault();
+          if(onClickToggleApplyInfo) {
+            onClickToggleApplyInfo();
+          }
+        }}
+      />
+    </Entire>
+  );
+}
 
 export default Modal;

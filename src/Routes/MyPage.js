@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useState } from "react";
 import MainHeader from "../Components/MainHeader";
 import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
-import { ResumeList } from "../sample";
 import { Link, useNavigate } from "react-router-dom";
-import Modal from "../Components/Modal";
 import ApplyInfo from "../Components/AppyInfo";
 import VCRequest from "../Components/VCRequest";
-import { useRecoilValue } from "recoil";
-import { isLoggedinAtom } from "../atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { isLoggedinAtom, isEmployAtom } from "../atoms";
+import { ResumeList, EmployerCareerList, EmployeeCareerList } from "../sample";
+import Modal from "../Components/Modal";
 
 const Entire = styled.div`
     width: 100%;
@@ -56,6 +56,35 @@ const List = styled.nav`
     box-shadow: 0 0 8px rgb(0 0 0 / 6%);
     background-color: ${(props) => props.theme.white1};
     border: 1px solid ${(props) => props.theme.lightgray};
+`;
+
+const Request = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+
+const Title = styled.h3`
+  text-align: center;
+`;
+
+const DialogButton = styled.button`
+  width: 160px;
+  height: 48px;
+  background-color: blueviolet;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 400;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
 `;
 
 const Sort = styled.div`
@@ -108,41 +137,18 @@ const Item = styled.button`
     }
 `;
 
-const Request = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-
-const Title = styled.h3`
-  text-align: center;
-`;
-
-const DialogButton = styled.button`
-  width: 160px;
-  height: 48px;
-  background-color: blueviolet;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 400;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    transform: translateY(-1px);
-  }
-`;
 
 function MyPage() {
     const [isOpenModal, setOpenModal] = useState(false);
     const [isApplyList, setIsApplyList] = useState(true);
     const [isVCList, setIsVCList] = useState(false);
     const isLoggedin = useRecoilValue(isLoggedinAtom);
+    const isEmployee = useRecoilValue(isEmployAtom);
     const navigate = useNavigate();
+
+    const onClickToggleModal = useCallback(() => {
+        setOpenModal(!isOpenModal);
+    }, [isOpenModal]);
 
     useEffect(() => {
         if(!isLoggedin) {
@@ -151,9 +157,6 @@ function MyPage() {
         }
     },[]);
 
-    const onClickToggleModal = useCallback(() => {
-      setOpenModal(!isOpenModal);
-    }, [isOpenModal]);
 
     const allFalse = () => {
         setIsApplyList(false);
@@ -174,35 +177,35 @@ function MyPage() {
 
     return (
         <Entire>
+                    {isOpenModal && ( 
+        <Modal onClickToggleApplyInfo={onClickToggleModal}>
+            <ApplyInfo/>
+        </Modal>
+        )}
             <MainHeader/>
             <Main>
-                {isOpenModal && ( 
-                    <Modal onClickToggleApplyInfo={onClickToggleModal}>
-                        <ApplyInfo/>
-                    </Modal>
-                )}
                 <Menu>
                     <ul>
                         {isApplyList ?
                         <MenuLi>
                             <ClickMenuButton
-                            onClick={ApplyClick}>{false ? <span>지원내역</span>:<span>지원자목록</span>}</ClickMenuButton>
+                            onClick={ApplyClick}>{isEmployee ? <span>지원내역</span>:<span>지원자목록</span>}</ClickMenuButton>
                         </MenuLi>
                         :
                         <MenuLi>
                             <MenuButton
-                            onClick={ApplyClick}>{false ? <span>지원내역</span>:<span>지원자목록</span>}</MenuButton>
+                            onClick={ApplyClick}>{isEmployee ? <span>지원내역</span>:<span>지원자목록</span>}</MenuButton>
                         </MenuLi>
                         }
                         {isVCList ?
                         <MenuLi>
                             <ClickMenuButton
-                            onClick={VCClick}>{false ? <span>경력요청내역</span>:<span>경력요청함</span>}</ClickMenuButton>
+                            onClick={VCClick}>{isEmployee ? <span>경력요청내역</span>:<span>경력요청함</span>}</ClickMenuButton>
                         </MenuLi>
                         :
                         <MenuLi>
                             <MenuButton
-                            onClick={VCClick}>{false ? <span>경력요청내역</span>:<span>경력요청함</span>}</MenuButton>
+                            onClick={VCClick}>{isEmployee ? <span>경력요청내역</span>:<span>경력요청함</span>}</MenuButton>
                         </MenuLi>
                         }
                         <MenuLi>
@@ -211,7 +214,34 @@ function MyPage() {
                     </ul>
                 </Menu>
                 <List>
-                { isApplyList && 
+                {/* !!!!!!!!!!!!!!!!!! 중복제거 필요함 !!!!!!!!!!!!!!!!!! */}
+                { isApplyList &&
+                    <> 
+                    <Sort>
+                        <SortItem>
+                            <span>⇅ 정렬기준</span>
+                        </SortItem>
+                    </Sort>
+                    <SubTitle>
+                        <span>no</span>
+                        <span style={{marginRight: "20px"}}>제목</span>
+                        <span></span>
+                    </SubTitle>
+                    <ul>
+                        {ResumeList.claims.map((element,index) => 
+                        <Item onClick={onClickToggleModal}>
+                            <span
+                            style={{
+                                color: "black",
+                            }}>{index+1}</span>
+                            <span>{element.title}</span>
+                            <span></span>
+                        </Item>
+                        )}
+                    </ul>
+                    </>
+                }
+                { isVCList &&
                     <>
                     <Sort>
                         <SortItem>
@@ -220,26 +250,22 @@ function MyPage() {
                     </Sort>
                     <SubTitle>
                         <span>no</span>
-                        <span>이름</span>
+                        <span style={{marginRight: "20px"}}>제목</span>
+                        <span></span>
                     </SubTitle>
                     <ul>
-                        {ResumeList.map(element => 
+                        {EmployerCareerList.claims.map((element, index) => 
                         <Item onClick={onClickToggleModal}>
                             <span
                             style={{
                                 color: "black",
-                            }}>{element.id}</span>
+                            }}>{index+1}</span>
                             <span>{element.title}</span>
-                            <span>{element.name}</span>
+                            <span></span>
                         </Item>
                         )}
                     </ul>
-                    </>
-                }
-                { isVCList &&
-                    <Request> 
-                        {/* <VCRequest/> */}
-                    </Request>  
+                    </> 
                 }
                 </List>  
             </Main> 
