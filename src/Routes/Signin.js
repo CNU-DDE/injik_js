@@ -141,7 +141,7 @@ function Signin() {
         axios.default.withCredentials = true;   
         const config = {
             method: 'post',
-            url: 'http://saltwalks.ddns.net:60072/api/v0/user/token',
+            url: 'http://saltwalks.ddns.net:60080/api/v0/user/token',
             headers: { 
                 'Content-Type': 'application/json',
             },
@@ -156,8 +156,6 @@ function Signin() {
             // setIsEmploy(data.); keystore로 회원정보 가져와야댐 !!!!!!!!!!!!!!!
             setKeystore(JSON.stringify(data.keystore));
             navigate("/");
-            const cookies = new Cookies();
-            cookies.set("access_token", response.data.access_token)
         })
         .catch(function (error) {
             alert("로그인에 실패하였습니다. 등록되지 않은 아이디거나\n, 아이디 또는 비밀번호가 일치하지 않습니다.");
