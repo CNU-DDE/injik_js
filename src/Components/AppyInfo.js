@@ -90,7 +90,8 @@ function ApplyInfo() {
     const navigate = useNavigate();
 
     const ContractClick = () => {
-        navigate("/Full/3/contract");
+        //navigate("/Full/3/contract");
+        alert("계약되었습니다.");
     }
 
     return(
@@ -108,7 +109,7 @@ function ApplyInfo() {
             </Info>
             <CoverLetter>
                 <CLHeader>
-                    <span>📌{" "}지원서 제목</span>
+                    <span>📌{" "}지원서</span>
                 </CLHeader>
                 <CL>
                 이력서

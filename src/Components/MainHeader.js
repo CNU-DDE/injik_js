@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import logo from "../img/injiklogo.png";
 import searchicon from "../img/searchicon.png";
-import { isLoggedin, isEmploy } from "../atoms";
+import { isLoggedin, isEmploy, forDemo } from "../atoms";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
 const UlParent = styled.ul`
@@ -161,6 +161,8 @@ const MenuLi = styled.li`
 `;
 
 function MainHeader() {
+
+    
     const navigate = useNavigate();
     const [isLogined, setIsLogined] = useState(true);
     const [isEmployee, setIsEmployee] = useState(true);
@@ -172,6 +174,8 @@ function MainHeader() {
     const RecoilLogin = useRecoilValue(isLoggedin);
     const RecoilEmploy = useRecoilValue(isEmploy);
     const setRecoilLogin = useSetRecoilState(isLoggedin);
+    const setRecoilDemo = useSetRecoilState(forDemo);
+
 
     const WorkStart = () => {
         let today = new Date();
@@ -198,6 +202,7 @@ function MainHeader() {
       }
 
     const reload = () => {
+        setRecoilDemo(true);
         navigate("/");
     }
     

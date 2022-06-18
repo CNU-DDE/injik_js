@@ -14,3 +14,8 @@ export const keystore = atom({
   key: "keystore",
   default: "",
 });
+
+export const forDemo = atom({
+  key: "Demo",
+  default: false,
+});

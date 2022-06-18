@@ -141,12 +141,13 @@ function Signin() {
             .then(function (response) {
             console.log(JSON.stringify(response.data));
             console.log(document.cookie)
-            navigate("/");
             })
             .catch(function (error) {
             console.log(error);
         });
         setRecoilLogin(true);
+        navigate("/");
+
         //setRecoilEmployee(isEmployee);
     };
 

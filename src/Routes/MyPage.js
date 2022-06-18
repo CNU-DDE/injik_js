@@ -1,13 +1,18 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import MainHeader from "../Components/MainHeader";
 import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
 import { ResumeList } from "../sample";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import Modal from "../Components/Modal";
 import ApplyInfo from "../Components/AppyInfo";
 import VCRequest from "../Components/VCRequest";
-
+import { forDemo } from "../atoms";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import Web3 from 'web3';
+import instance from './config';
+import { CONTACT_ABI, CONTACT_ADDRESS } from './config';
+ 
 const Entire = styled.div`
     width: 100%;
 `;
@@ -136,10 +141,47 @@ const DialogButton = styled.button`
 `;
 
 function MyPage() {
+    
+    const [User, setUser] = useState("");
+    const [View_Id, setView_Id] = useState(0);
+    const [Add_Id, setAdd_Id] = useState(0);
+    const [Add_Name, setAdd_Name] = useState("");
+    const [Add_Age, setAdd_Age] = useState(0);
+    const [Balance, setBalance] = useState(0);
+
     const [isOpenModal, setOpenModal] = useState(false);
     const [isApplyList, setIsApplyList] = useState(true);
     const [isVCList, setIsVCList] = useState(false);
+    const navigate = useNavigate();    
+    const useRecoilDemo = useRecoilValue(forDemo);
 
+    const [account, setAccount] = useState(); // state variable to set account.
+
+
+    // const initWeb3 = async () => {
+    //     if (typeof window.ethereum !== 'undefined') {
+    //       window.web3 = new Web3(window.web3.currentProvider);
+    //       try {
+    //         await window.ethereum.enable();
+    //         console.log(`✅ Connected Properly`)
+    //       } catch (err) {
+    //         console.log(`❌ ETH NONO!`,err)
+    //       }
+    //     } else {
+    //       console.log("no !!!!!")
+    //     }
+    
+    //     window.web3.eth.getAccounts().then(res => {
+    //       console.log(`현재 사용자 : ${res[0]}`);
+    //       setUser(res[0]);
+    //     });
+    
+    //     console.log("CP:", window.web3.currentProvider);
+    //     account(new window.web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS));
+    // };
+  
+
+  
     const onClickToggleModal = useCallback(() => {
       setOpenModal(!isOpenModal);
     }, [isOpenModal]);
@@ -160,6 +202,28 @@ function MyPage() {
         allFalse();
         setIsVCList(prev => !prev);
     }
+
+
+    // const submitClick = () => {
+        
+    //     async function load() {
+    //         //const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
+    //         //const accounts = await web3.eth.requestAccounts();
+    //         //setAccount(accounts[0]);
+    //        // this.injikContract = new this.web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS);
+    //         instance.methods.registrationJobPosting('0x206dfDA5317b54Ba73E50660E6A041A624035f39', 'dffs', 32).call();
+
+    //     }
+    //     load();
+    // }
+
+    const setStudentInfo = () => {
+        // account.methods.registrationJobPosting('0x206dfDA5317b54Ba73E50660E6A041A624035f39', 'ssdad', 12).call()
+        //   .then(result => {
+        //     console.log(result);
+        //     //칸 초기화
+        //   })
+      };
 
     return (
         <Entire>
@@ -220,6 +284,9 @@ function MyPage() {
                             }}>{element.id}</span>
                             <span>{element.title}</span>
                             <span>{element.name}</span>
+                            <button
+                            style={{backgroundColor: "green", }}
+                            onClick={setStudentInfo}>송금</button>
                         </Item>
                         )}
                     </ul>

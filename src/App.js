@@ -3,7 +3,9 @@ import { RecoilRoot } from "recoil";
 import { createGlobalStyle,ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import AppRouter from "./Router";
-//rt Web3 from "web3"
+import Web3 from 'web3'
+import { CONTACT_ABI, CONTACT_ADDRESS } from './Routes/config';
+
 
 const GlobalStyle = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -58,17 +60,71 @@ table {
 
 function App() {
   const [init, setInit] = useState(false);
+  // const [account, setAccount] = useState();
+  // const [contactList, setContactList] = useState();
+  // const [contacts, setContacts] = useState([]);
+
+  const [contract, setContract] = useState({});
+  const [User, setUser] = useState("");
+  const [View_Id, setView_Id] = useState(0);
+  const [Add_Id, setAdd_Id] = useState(0);
+  const [Add_Name, setAdd_Name] = useState("");
+  const [Add_Age, setAdd_Age] = useState(0);
+  const [Balance, setBalance] = useState(0);
+
 
   useEffect(() => {
     setInit(true);
+    initWeb3();
   }, []);
+
+  const initWeb3 = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      window.web3 = new Web3(window.web3.currentProvider);
+      try {
+        await window.ethereum.enable();
+        console.log(`✅ Connected Properly`)
+      } catch (err) {
+        console.log(`❌ ETH NONO!`,err)
+      }
+    } else {
+      console.log("no !!!!!")
+    }
+
+    window.web3.eth.getAccounts().then(res => {
+      console.log(`현재 사용자 : ${res[0]}`);
+      setUser(res[0]);
+    });
+
+    console.log("CP:", window.web3.currentProvider);
+    setContract(new window.web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS));
+    console.log(CONTACT_ADDRESS);
+    console.log(CONTACT_ABI);
+    console.log(contract);
+};
+
+const setAccount = async () => {
+  await contract.methods.testWeb3().call({from:User}).then(result => {
+    console.log(result);
+    //칸 초기화
+  })
+ 
+};
+
+
+
 
   return (
     <>
       {init ? 
       <ThemeProvider theme={theme}>
+
         <RecoilRoot>
           <GlobalStyle />
+          <button
+            onClick={setAccount}>
+            <span>로그아웃</span>
+          </button>
           <AppRouter/>
         </RecoilRoot> 
       </ThemeProvider>
