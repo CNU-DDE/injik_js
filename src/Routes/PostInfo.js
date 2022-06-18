@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { isLoggedinAtom } from "../atoms";
 //import Map from "../Components/Map";
 import KAKAO from "../img/KAKAO.png";
 
@@ -11,6 +13,7 @@ const Entire = styled.div`
     align-items: center;
     width: 100%;
     min-height: 1000px;
+    height: 100vh;
     background-color: ${(props) => props.theme.white1};
 `;
 
@@ -71,7 +74,6 @@ const MainStoryArea = styled.main`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 500px;
 `;
 
 const MainStoryStory = styled.article`
@@ -129,7 +131,14 @@ const MainBottomButton = styled.button`
 function PostInfo() {
     const navigate = useNavigate();
     const params = useParams();
-    console.log(params);
+    const isLoggedin = useRecoilValue(isLoggedinAtom);
+
+    useEffect(() => {
+        if(!isLoggedin) {
+            alert("로그인이 필요합니다");
+            navigate("/Signin");
+        }
+    },[]);    
 
     const returnClick = () => {
         navigate("/");
@@ -171,7 +180,9 @@ function PostInfo() {
                     <MainStoryStory>
                         <img
                         style={{width: "100%", objectFit: "scale-down"}}
-                        src={KAKAO}>
+                        src={KAKAO}
+                        alt=""
+                        >
                         </img>
                     </MainStoryStory>
                 </MainStoryArea>

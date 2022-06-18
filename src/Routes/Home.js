@@ -5,8 +5,9 @@ import { FullTimeList, PartTimeList, InternList } from "../sample";
 import styled from "styled-components";
 import MainHeader from "../Components/MainHeader";
 import MainFooter from "../Components/MainFooter";
-import mention from "../img/mention.png";
-import career2 from "../img/career2.png";
+import Banner from "../Components/Banner";
+import { isLoggedinAtom } from "../atoms";
+import { useRecoilValue } from "recoil";
 
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Main 
 const Main = styled.main`
@@ -43,22 +44,8 @@ const SubMain = styled.div`
     height: 300px;
     width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     background: linear-gradient(${(props) => props.theme.skyblue} 50%, ${(props) => props.theme.white} 50%);
-`;
-
-const SubMainImg = styled.img`
-    position: relative;
-    top: -100px;
-    height: 450px;
-    object-fit: scale-down;
-`;
-
-const SubMainMent = styled.img`
-    width: 500px;
-    position: relative;
-    top: -220px;
 `;
 
 const MainCompo = styled.div`
@@ -119,24 +106,18 @@ const HomeInternList = styled.ul`
 
 
 function Home() {
-    const [isLogined, setIsLogined] = useState(true);
+    const isLoggined = useRecoilValue(isLoggedinAtom);
 
     return (
         <>
         <MainHeader/>
         <SubMain>
-            <SubMainImg
-            src={career2} alt="직업">
-            </SubMainImg>
-            <SubMainMent
-            src={mention} alt="멘트"
-            >
-            </SubMainMent>
+            <Banner/>
         </SubMain>
         <Main>
             <MainFullTime>
                 <CataName>
-                    <MainHeaderName>채용</MainHeaderName>
+                    {/* <MainHeaderName>채용</MainHeaderName> */}
                 </CataName>
                 <MainFullTimeList>
                     {FullTimeList.map(element => (
@@ -160,7 +141,7 @@ function Home() {
             </MainFullTime>
             <MainPartTime>
                 <CataName>
-                    <MainHeaderName>아르바이트</MainHeaderName>
+                    {/* <MainHeaderName>아르바이트</MainHeaderName> */}
                 </CataName>
                 <MainPartTimeList>
                     {PartTimeList.map(element => (
@@ -182,7 +163,7 @@ function Home() {
             </MainPartTime>
             <MainIntern>
                 <CataName>
-                    <MainHeaderName>인턴</MainHeaderName>
+                    {/* <MainHeaderName>인턴</MainHeaderName> */}
                 </CataName>
                 <HomeInternList>
                     {InternList.map(element => (

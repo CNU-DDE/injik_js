@@ -4,8 +4,8 @@ import SubHeader from "../Components/SubHeader";
 import MainFooter from "../Components/MainFooter";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { isLoggedin, isEmploy, keystore } from "../atoms";
-import { useSetRecoilState } from "recoil";
+import { isLoggedinAtom, isEmployAtom, keystoreAtom } from "../atoms";
+import { useRecoilState } from "recoil";
 
 
 const Main = styled.main`
@@ -85,6 +85,7 @@ const LoginInputbutton = styled.button`
     font-weight: 600;
     grid-row: 1 / 3;
     grid-column: 2 / 3;
+    width: 85px;
     &:hover {
       cursor: pointer;
     }
@@ -119,12 +120,16 @@ const LoginAlterfind = styled(Link)`
 function Signin() {
     const { register, handleSubmit, formState, setError, } = useForm();
     const navigate = useNavigate();
-    const setRecoilLogin = useSetRecoilState(isLoggedin);
-    const setRecoilEmployee = useSetRecoilState(isEmploy);
-    const setRecoilkeystore = useSetRecoilState(keystore);
+    const [isLoggedin, setIsLogined] = useRecoilState(isLoggedinAtom);
+    const [isEmploy, setIsEmploy] = useRecoilState(isEmployAtom);
+    const [keystore, setKeystore] = useRecoilState(keystoreAtom);
     
     // RestAPI POST ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     const onValid = (data) => {
+        if(data.keystore === "{\"test\": true}" && data.password === "1234") {
+            setIsLogined(true);
+            navigate("/");
+        }
         data.keystore = JSON.parse(data.keystore);
         const axios = require('axios'); 
         axios.default.withCredentials = true;   
@@ -140,15 +145,26 @@ function Signin() {
             axios(config)
             .then(function (response) {
             console.log(JSON.stringify(response.data));
+<<<<<<< HEAD
             console.log(document.cookie)
+=======
+            //console.log(document.cookie)
+            setIsLogined(true);
+            // setIsEmploy(data.); keystore로 회원정보 가져와야댐 !!!!!!!!!!!!!!!
+            setKeystore(JSON.stringify(data.keystore));
+            navigate("/");
+>>>>>>> origin/master
             })
             .catch(function (error) {
             console.log(error);
         });
+<<<<<<< HEAD
         setRecoilLogin(true);
         navigate("/");
 
         //setRecoilEmployee(isEmployee);
+=======
+>>>>>>> origin/master
     };
 
     //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

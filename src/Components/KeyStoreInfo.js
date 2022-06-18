@@ -41,9 +41,7 @@ function KeyStoreInfo({keystore}) {
                 <Header>🎈 회원가입이 완료되었습니다. <br/>key 값을 안전한 곳에 저장해주세요.</Header>
             </HeaderSection>
             <Info>
-
-                    {JSON.stringify(keystore)}
-
+                {JSON.stringify(keystore)}
             </Info>
             <FooterSection>
                 <SubmitButton 

@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 import React, { useCallback, useState, useEffect } from "react";
+=======
+import React, { useCallback, useEffect, useState } from "react";
+>>>>>>> origin/master
 import MainHeader from "../Components/MainHeader";
 import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
 import { ResumeList } from "../sample";
+<<<<<<< HEAD
 import { Link , useNavigate} from "react-router-dom";
 import Modal from "../Components/Modal";
 import ApplyInfo from "../Components/AppyInfo";
@@ -13,6 +18,15 @@ import Web3 from 'web3';
 import instance from './config';
 import { CONTACT_ABI, CONTACT_ADDRESS } from './config';
  
+=======
+import { Link, useNavigate } from "react-router-dom";
+import Modal from "../Components/Modal";
+import ApplyInfo from "../Components/AppyInfo";
+import VCRequest from "../Components/VCRequest";
+import { useRecoilValue } from "recoil";
+import { isLoggedinAtom } from "../atoms";
+
+>>>>>>> origin/master
 const Entire = styled.div`
     width: 100%;
 `;
@@ -152,6 +166,7 @@ function MyPage() {
     const [isOpenModal, setOpenModal] = useState(false);
     const [isApplyList, setIsApplyList] = useState(true);
     const [isVCList, setIsVCList] = useState(false);
+<<<<<<< HEAD
     const navigate = useNavigate();    
     const useRecoilDemo = useRecoilValue(forDemo);
 
@@ -180,6 +195,17 @@ function MyPage() {
     //     account(new window.web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS));
     // };
   
+=======
+    const isLoggedin = useRecoilValue(isLoggedinAtom);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!isLoggedin) {
+            alert("로그인이 필요합니다");
+            navigate("/Signin");
+        }
+    },[]);
+>>>>>>> origin/master
 
   
     const onClickToggleModal = useCallback(() => {
@@ -239,23 +265,23 @@ function MyPage() {
                         {isApplyList ?
                         <MenuLi>
                             <ClickMenuButton
-                            onClick={ApplyClick}>지원목록</ClickMenuButton>
+                            onClick={ApplyClick}>{false ? <span>지원내역</span>:<span>지원자목록</span>}</ClickMenuButton>
                         </MenuLi>
                         :
                         <MenuLi>
                             <MenuButton
-                            onClick={ApplyClick}>지원목록</MenuButton>
+                            onClick={ApplyClick}>{false ? <span>지원내역</span>:<span>지원자목록</span>}</MenuButton>
                         </MenuLi>
                         }
                         {isVCList ?
                         <MenuLi>
                             <ClickMenuButton
-                            onClick={VCClick}>경력발급</ClickMenuButton>
+                            onClick={VCClick}>{false ? <span>경력요청내역</span>:<span>경력요청함</span>}</ClickMenuButton>
                         </MenuLi>
                         :
                         <MenuLi>
                             <MenuButton
-                            onClick={VCClick}>경력발급</MenuButton>
+                            onClick={VCClick}>{false ? <span>경력요청내역</span>:<span>경력요청함</span>}</MenuButton>
                         </MenuLi>
                         }
                         <MenuLi>
@@ -294,7 +320,7 @@ function MyPage() {
                 }
                 { isVCList &&
                     <Request> 
-                        <VCRequest/>
+                        {/* <VCRequest/> */}
                     </Request>  
                 }
                 </List>  

@@ -8,6 +8,8 @@ import Modal from "../Components/Modal";
 import { useCallback, useEffect, useState } from "react";
 import CoverLetterList from "../Components/CoverLetterList";
 import CareerList from "../Components/CareerList";
+import { useRecoilValue } from "recoil";
+import { isLoggedinAtom } from "../atoms";
 
 const Entire = styled.div`
     display: flex;
@@ -136,14 +138,16 @@ function DrawResume() {
     const [isOpenModalCR, setOpenModalCR] = useState(false);
     const [ CLList, setCLList ] = useState([]);
     const [ CRList, setCRList ] = useState([]);
+    const isLoggedin = useRecoilValue(isLoggedinAtom);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("mount");
+        if(!isLoggedin) {
+            alert("로그인이 필요합니다");
+            navigate("/Signin");
+        }
     },[]);
 
-
-    const navigate = useNavigate();
-    
     const onValid = (data) => {
         console.log(data);
     }

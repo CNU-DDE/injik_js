@@ -6,8 +6,6 @@ import Modal from "../Components/Modal";
 import KeyStoreInfo from "../Components/KeyStoreInfo";
 import axios from "axios";
 import injiklogo2 from "../img/injiklogo2.png";
-import { useSetRecoilState } from "recoil";
-import { isLoggedin, isEmploy, keystore } from "../atoms";
 
 
 const Main = styled.main`
@@ -129,9 +127,6 @@ function Signup () {
     const navigate = useNavigate();
     const [isOpenModal, setOpenModal] = useState(false);
     const [keyvalue, setKeyvalue] = useState();
-    const setRecoilLogin = useSetRecoilState(isLoggedin);
-    const setRecoilEmployee = useSetRecoilState(isEmploy);
-    const setRecoilkeystore = useSetRecoilState(keystore);
 
     const onClickToggleModal = useCallback(() => {
       setOpenModal(!isOpenModal);
@@ -158,16 +153,12 @@ function Signup () {
        axios(config)
            .then(function (response) {
             console.log(JSON.stringify(response.data));
-                setKeyvalue(response.data.keystore);
+            setKeyvalue(response.data.keystore);
            })
            .catch(function (error) {
            console.log(error);
            alert("회원가입 실패");
        });
-       setRecoilLogin(true);
-       setRecoilEmployee(isEmployee);
-       setRecoilkeystore(data.keystore);
-
     }
     //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     

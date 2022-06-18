@@ -5,8 +5,13 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import logo from "../img/injiklogo.png";
 import searchicon from "../img/searchicon.png";
+<<<<<<< HEAD
 import { isLoggedin, isEmploy, forDemo } from "../atoms";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+=======
+import { isLoggedinAtom, isEmployAtom, keystoreAtom } from "../atoms";
+import { useRecoilValue, useSetRecoilState, useResetRecoilState, useRecoilState} from "recoil";
+>>>>>>> origin/master
 
 const UlParent = styled.ul`
     list-style: none;
@@ -164,6 +169,7 @@ function MainHeader() {
 
     
     const navigate = useNavigate();
+<<<<<<< HEAD
     const [isLogined, setIsLogined] = useState(true);
     const [isEmployee, setIsEmployee] = useState(true);
     const { register, watch } = useForm();
@@ -200,6 +206,11 @@ function MainHeader() {
         setEnd([year,month,day,hours,minutes,seconds]);
         setIsEnd((prev) => !prev);
       }
+=======
+    const [isLoggedin, setIsLogined] = useRecoilState(isLoggedinAtom);
+    const [isEmploy, setIsEmploy] = useRecoilState(isEmployAtom);
+    const [keystore, setKeystore] = useRecoilState(keystoreAtom);
+>>>>>>> origin/master
 
     const reload = () => {
         setRecoilDemo(true);
@@ -213,7 +224,7 @@ function MainHeader() {
     }
     
     const toResume = () => {
-        if(RecoilLogin) {
+        if(isLoggedin) {
             navigate("/DrawResume");
         } else {
             alert("로그인이 필요합니다.");
@@ -222,7 +233,7 @@ function MainHeader() {
     }
     
     const toPost = () => {
-        if(RecoilLogin) {
+        if(isLoggedin) {
             navigate("/DrawPost");
         } else {
             alert("로그인이 필요합니다.");
@@ -235,7 +246,18 @@ function MainHeader() {
     }
 
     const logoutClick = () => {
-        setRecoilLogin(false);
+        setIsLogined(false);
+        setIsEmploy(false);
+        setKeystore("");
+    }
+
+    const toVCIssue = () => {
+        if(isLoggedin) {
+            navigate("/VCIssue");
+        } else {
+            alert("로그인이 필요합니다.");
+            navigate("/Signin");
+        }    
     }
 
     return (
@@ -243,7 +265,7 @@ function MainHeader() {
             <Search>
                 <Sign>
                     <SignUl>
-                        { RecoilLogin ?
+                        { isLoggedin ?
                         <SignLi>
                             <button
                             onClick={logoutClick}>
@@ -264,7 +286,7 @@ function MainHeader() {
                         <SignLi>
                             <span style={{opacity: 0.2}}>│</span>
                         </SignLi>
-                        { RecoilLogin ?
+                        { isLoggedin ?
                         <SignLi>
                             <Link
                             to="/MyPage"
@@ -314,11 +336,9 @@ function MainHeader() {
                             <span>커뮤니티</span>
                         </MenuLi>
                         <MenuLi>
-                            { isEmployee &&
-                            <button onClick={toResume}>
+                            <button onClick={toVCIssue}>
                                 <span>경력발급</span>
                             </button>
-                            }
                         </MenuLi>
                     </MenuUl>
                     <MenuUl>

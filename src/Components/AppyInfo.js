@@ -71,7 +71,7 @@ const CareerItems = styled.li`
     background-color: ${(props) => props.theme.white};
     box-shadow: ${(props) => props.theme.shadow};
     border-radius: 10px;
-    margin: 10px 0;
+    margin: 20px 0;
 `;
 
 const CareerItem = styled.li`
@@ -97,19 +97,23 @@ function ApplyInfo() {
     return(
         <Main>
             <Header>
-                <Resume>Resume</Resume>
+                <Resume>계약서</Resume>
             </Header>
             <Info>
                 <InfoItems>
-                    <li><span>이름 배성민</span></li>
-                    <li><span>전화번호 010-7722-1234</span></li>
-                    <li><span>메일 abc@naver.com</span></li>
-                    <li><span>주소 대전광역시</span></li>
+                    <li><span>이름 카카오</span></li>
+                    <li><span>전화번호 010-1234-5678</span></li>
+                    <li><span>메일 kakao@naver.com</span></li>
+                    <li><span>주소 서울광역시</span></li>
                 </InfoItems>
             </Info>
             <CoverLetter>
                 <CLHeader>
+<<<<<<< HEAD
                     <span>📌{" "}지원서</span>
+=======
+                    <span>📌{" "}계약서</span>
+>>>>>>> origin/master
                 </CLHeader>
                 <CL>
                 이력서
@@ -120,12 +124,13 @@ function ApplyInfo() {
                 <ul>
                     { ResumeList.map((element) => 
                         <CareerItems>
-                            <ul
+                            {/* <ul
                             style={{padding: "20px"}}>
                                 <CareerItem>{element.name}</CareerItem>
                                 <CareerItem>{element.id}</CareerItem>
                                 <CareerItem>{element.title}</CareerItem>
-                            </ul>
+                            </ul> */}
+                            <CareerItem>계약이 채결 되었습니다.</CareerItem>
                         </CareerItems>
                     )}
                 </ul>

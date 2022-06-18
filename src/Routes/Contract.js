@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
@@ -6,6 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import SubmitButton from "../Components/SubmitButton";
 import person1 from "../img/person1.png";
 import person2 from "../img/person2.png";
+import { useRecoilValue } from "recoil";
+import { isLoggedinAtom } from "../atoms";
 
 const Entire = styled.div`
     display: flex;
@@ -126,8 +128,21 @@ const Submit = styled.div`
 function Contract() {
     const params = useParams();
     const navigate = useNavigate();
+    const isLoggedin = useRecoilValue(isLoggedinAtom);
+
+    useEffect(() => {
+        if(!isLoggedin) {
+            alert("로그인이 필요합니다");
+            navigate("/Signin");
+        }
+    },[]);
 
     const returnClick = () => {
+        navigate("/");
+    }
+
+    const SubmitClick = () => {
+        alert("계약되었습니다.");
         navigate("/");
     }
      
@@ -148,9 +163,9 @@ function Contract() {
                     <Split/>
                     <Info>
                         <PersonImg src={person2}/>
-                        <span>카카오</span>
-                        <span>010-3387-9513</span>
-                        <span>qo98333@naver.com</span>
+                        <span>kakao</span>
+                        <span>010-1234-5678</span>
+                        <span>KAKAO@naver.com</span>
                     </Info>
                 </PersonInfo>
                 <ContractInfo>
@@ -164,7 +179,9 @@ function Contract() {
                     </Input>
                 </ContractInfo>
                 <Submit>
-                    <SubmitButton text="계약하기"/>
+                    <SubmitButton 
+                    text="계약하기"
+                    onClick={SubmitClick}/>
                 </Submit>
                 {/* <ImgSection>  
                     <Img src={require("../img/contract.jpeg")}/>
