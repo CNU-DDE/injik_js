@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import SubmitButton from "../Components/SubmitButton";
 import officalImg2 from "../img/officalImg2.png";
-import InputBox from "../Components/InputBox";
+//import Input from "../Components/Input";
 import { useNavigate } from "react-router";
 import { useRecoilValue } from "recoil";
 import { isLoggedinAtom } from "../atoms";
@@ -181,6 +181,17 @@ const Maindiv = styled.section`
     height: 100px;
 `;
 
+const Input = styled.input`
+    align-items: center;
+    background-color: hsl(0, 0%, 100%);
+    border-color: hsl(0, 0%, 80%);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    min-height: 30px;
+    width: 200px;
+`;
+
 function DrawPost() {
     const [isFull, setIsFull] = useState(true);
     const [isPart, setIsPart] = useState(false);
@@ -190,6 +201,15 @@ function DrawPost() {
     const { register, handleSubmit, formState } = useForm();
     const isLoggedin = useRecoilValue(isLoggedinAtom);
     const navigate = useNavigate();
+
+    //-----------------------
+
+
+    
+
+
+
+    //-------------------------
 
     useEffect(() => {
         if(!isLoggedin) {
@@ -220,6 +240,27 @@ function DrawPost() {
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     const onValid = (data) => {
         console.log(data);
+
+        const axios = require('axios');
+        axios.defaults.withCredentials = true;
+        
+        const config = {
+          method: 'post',
+          url: 'http://saltwalks.ddns.net:60072/api/v0/position',
+          headers: { 
+            'Content-Type': 'application/json',
+          },
+          data :JSON.stringify(data),
+        };
+        
+        axios.post('http://saltwalks.ddns.net:60072/api/v0/position', data, { withCredentials:true})
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
     }
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -275,27 +316,27 @@ function DrawPost() {
                                 <ConditionItem
                                 style={{marginTop: "20px"}}>
                                     <span>근무기간</span>
-                                    <InputBox
+                                    <Input
                                     {...register("employment_period", {required: true})}/>
                                 </ConditionItem>
                                 <ConditionItem>
                                     <span>근무시간</span>
-                                    <InputBox
+                                    <Input
                                     {...register("working_time", {required: true})}/>
                                 </ConditionItem>
                                 <ConditionItem>
                                     <span>급여종류</span>
-                                    <InputBox
+                                    <Input
                                     {...register("payment_interval_type", {required: true})}/>
                                 </ConditionItem>
                                 <ConditionItem>
                                     <span>급여금액</span>
-                                    <InputBox
+                                    <Input
                                     {...register("payment_per_interval", {required: true})}/>
                                 </ConditionItem>
                                 <ConditionItem>
                                     <span>모집인원</span>
-                                    <InputBox
+                                    <Input
                                     {...register("hiring_number", {required: true})}/>
                                 </ConditionItem>
                             </Condition>
@@ -351,8 +392,7 @@ function DrawPost() {
                     {...register("content", {required: true})}/>
                 </MainStory>
                 <Maindiv>
-                        <SubmitButton
-                        text="공고등록"/>
+                    <SubmitButton text="공고등록"/>
                 </Maindiv>
                 </form>
             </Main>

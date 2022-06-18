@@ -117,7 +117,7 @@ function ApplyInfo() {
             </CoverLetter>
             <Career>
                 <ul>
-                    { ResumeList.map((element) => 
+                    { ResumeList.claims.map((element) => 
                         <CareerItems>
                             {/* <ul
                             style={{padding: "20px"}}>

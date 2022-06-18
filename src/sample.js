@@ -332,3 +332,48 @@ export const EmployeeCareerList = [
         ]
     }
 ]
+
+export const PostList = {
+    "error": null,
+    "positions": [
+        {
+            "id": 1,
+            "title": "맥도날드에서 일하실분",
+            "employment_period": "6개월",
+            "working_time": "오후 5시 ~ 7시",
+            "payment_interval_type": "시급",
+            "payment_per_interval": "8650원",
+            "hiring_number": 3,
+            "employer": {
+                "did": "did:ethr:ropsten:0x02e5d8a99293d39ecf858ac90d184785b29ab8fc7c28faf1fbeb62056149784564",
+                "display_name": "haeramkeem"
+            }
+        },
+        {
+            "id": 2,
+            "title": "맥도날드에서 일하실분",
+            "employment_period": "6개월",
+            "working_time": "오후 5시 ~ 7시",
+            "payment_interval_type": "시급",
+            "payment_per_interval": "8650원",
+            "hiring_number": 3,
+            "employer": {
+                "did": "did:ethr:ropsten:0x02e5d8a99293d39ecf858ac90d184785b29ab8fc7c28faf1fbeb62056149784564",
+                "display_name": "김피탕"
+            }
+        },
+        {
+            "id": 3,
+            "title": "맥도날드에서 일하실분",
+            "employment_period": "6개월",
+            "working_time": "오후 5시 ~ 7시",
+            "payment_interval_type": "시급",
+            "payment_per_interval": "8650원",
+            "hiring_number": 3,
+            "employer": {
+                "did": "did:ethr:ropsten:0x03e4a3996ecb69938a1e278feeafc314364b2ea915499edd57d54509ccf4f0e65a",
+                "display_name": "haeramkeem"
+            }
+        }
+    ]
+};

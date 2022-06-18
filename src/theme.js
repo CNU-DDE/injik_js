@@ -9,7 +9,7 @@ export const theme = {
     deepskyblue: "#0984e3",
     skyblue: "#1e90ff",
     lightgray: "#e3e3e3",
-    gray: "#444",
+    gray: "#2d3436",
     deepgray: "#222222",
     shadow: "0 0 8px rgb(0 0 0 / 6%)",
 };

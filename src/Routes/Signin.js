@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import SubHeader from "../Components/SubHeader";
 import MainFooter from "../Components/MainFooter";
@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { isLoggedinAtom, isEmployAtom, keystoreAtom } from "../atoms";
 import { useRecoilState } from "recoil";
-
+import {Cookies} from 'react-cookie'
 
 const Main = styled.main`
     margin: 0 auto;
@@ -123,19 +123,25 @@ function Signin() {
     const [isLoggedin, setIsLogined] = useRecoilState(isLoggedinAtom);
     const [isEmploy, setIsEmploy] = useRecoilState(isEmployAtom);
     const [keystore, setKeystore] = useRecoilState(keystoreAtom);
+
+
+    useEffect(() => {
+        console.log("signin mount !!!");
+    },[]);
     
     // RestAPI POST ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     const onValid = (data) => {
         if(data.keystore === "{\"test\": true}" && data.password === "1234") {
             setIsLogined(true);
             navigate("/");
+            return ;
         }
         data.keystore = JSON.parse(data.keystore);
         const axios = require('axios'); 
         axios.default.withCredentials = true;   
         const config = {
             method: 'post',
-            url: 'http://saltwalks.ddns.net:60072/api/user/token',
+            url: 'http://saltwalks.ddns.net:60072/api/v0/user/token',
             headers: { 
                 'Content-Type': 'application/json',
             },
@@ -150,11 +156,15 @@ function Signin() {
             // setIsEmploy(data.); keystore로 회원정보 가져와야댐 !!!!!!!!!!!!!!!
             setKeystore(JSON.stringify(data.keystore));
             navigate("/");
+            const cookies = new Cookies();
+            cookies.set("access_token", response.data.access_token)
         })
         .catch(function (error) {
             alert("로그인에 실패하였습니다. 등록되지 않은 아이디거나\n, 아이디 또는 비밀번호가 일치하지 않습니다.");
         });
     };
+
+
 
     //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     return(

@@ -109,6 +109,10 @@ const SearchButton = styled.button`
     border: 0;
     width: 10%;
     background-color: transparent;
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 const SearchIcon = styled.img`
@@ -119,7 +123,7 @@ const SearchIcon = styled.img`
 
 const Menu = styled.div`
     border-top: 1px solid ${(props) => props.theme.lightgray};
-    border-bottom: 5px solid ${(props) => props.theme.skyblue};
+    border-bottom: 3px solid ${(props) => props.theme.skyblue};
     z-index: 1000;
 `;
 
@@ -165,6 +169,7 @@ function MainHeader() {
     const [isLoggedin, setIsLogined] = useRecoilState(isLoggedinAtom);
     const [isEmploy, setIsEmploy] = useRecoilState(isEmployAtom);
     const [keystore, setKeystore] = useRecoilState(keystoreAtom);
+    const [search, setSearch] = useState("");
 
     const reload = () => {
         navigate("/");
@@ -174,6 +179,11 @@ function MainHeader() {
         const {
             currentTarget: { value },
         } = event;
+        setSearch(value);
+    }
+
+    const searchClick = () => {
+        navigate(`/${search}`);
     }
     
     const toResume = () => {
@@ -267,7 +277,7 @@ function MainHeader() {
                         <SearchBox>
                             <input type="text" placeholder="&nbsp;&nbsp;검색어" onChange={inputChange} autoFocus
                             style={{marginLeft: "10px"}}/>
-                            <SearchButton>
+                            <SearchButton onClick={searchClick}>
                                 <SearchIcon src={searchicon} alt="버튼이미지"/>
                             </SearchButton>
                         </SearchBox>

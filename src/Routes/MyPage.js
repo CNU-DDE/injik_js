@@ -177,7 +177,7 @@ function MyPage() {
 
     return (
         <Entire>
-                    {isOpenModal && ( 
+        {isOpenModal && ( 
         <Modal onClickToggleApplyInfo={onClickToggleModal}>
             <ApplyInfo/>
         </Modal>
