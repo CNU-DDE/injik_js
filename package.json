@@ -5,6 +5,7 @@
   "dependencies": {
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/react-select": "^5.0.1",
     "add": "^2.0.6",
     "axios": "^0.27.2",
     "firebase": "^9.6.1",
@@ -16,7 +17,6 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^4.0.3",
-    "react-select": "^5.3.2",
     "recoil": "^0.7.3",
     "sass": "^1.52.3",
     "styled-components": "^5.3.5",

@@ -5,13 +5,8 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import logo from "../img/injiklogo.png";
 import searchicon from "../img/searchicon.png";
-<<<<<<< HEAD
-import { isLoggedin, isEmploy, forDemo } from "../atoms";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-=======
 import { isLoggedinAtom, isEmployAtom, keystoreAtom } from "../atoms";
 import { useRecoilValue, useSetRecoilState, useResetRecoilState, useRecoilState} from "recoil";
->>>>>>> origin/master
 
 const UlParent = styled.ul`
     list-style: none;
@@ -166,54 +161,12 @@ const MenuLi = styled.li`
 `;
 
 function MainHeader() {
-
-    
     const navigate = useNavigate();
-<<<<<<< HEAD
-    const [isLogined, setIsLogined] = useState(true);
-    const [isEmployee, setIsEmployee] = useState(true);
-    const { register, watch } = useForm();
-    const [start, setStart] = useState([0,0,0,0,0,0]);
-    const [end, setEnd] = useState([0,0,0,0,0,0]);
-    const [isStart, setIsStart] = useState(false);
-    const [isEnd, setIsEnd] = useState(false)
-    const RecoilLogin = useRecoilValue(isLoggedin);
-    const RecoilEmploy = useRecoilValue(isEmploy);
-    const setRecoilLogin = useSetRecoilState(isLoggedin);
-    const setRecoilDemo = useSetRecoilState(forDemo);
-
-
-    const WorkStart = () => {
-        let today = new Date();
-        let year = today.getFullYear(); // 년도
-        let month = today.getMonth() + 1;  // 월
-        let day = today.getDay();  // 요일
-        let hours = today.getHours(); // 시
-        let minutes = today.getMinutes();  // 분
-        let seconds = today.getSeconds();  // 초
-        setStart([year,month,day,hours,minutes,seconds]);
-        setIsStart((prev) => !prev);
-      }
-    
-      const WorkEnd = () => {
-        let today = new Date();
-        let year = today.getFullYear(); // 년도
-        let month = today.getMonth() + 1;  // 월
-        let day = today.getDay();  // 요일
-        let hours = today.getHours(); // 시
-        let minutes = today.getMinutes();  // 분
-        let seconds = today.getSeconds();  // 초
-        setEnd([year,month,day,hours,minutes,seconds]);
-        setIsEnd((prev) => !prev);
-      }
-=======
     const [isLoggedin, setIsLogined] = useRecoilState(isLoggedinAtom);
     const [isEmploy, setIsEmploy] = useRecoilState(isEmployAtom);
     const [keystore, setKeystore] = useRecoilState(keystoreAtom);
->>>>>>> origin/master
 
     const reload = () => {
-        setRecoilDemo(true);
         navigate("/");
     }
     

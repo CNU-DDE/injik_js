@@ -1,24 +1,10 @@
-<<<<<<< HEAD
-import React, { useCallback, useState, useEffect } from "react";
-=======
+
 import React, { useCallback, useEffect, useState } from "react";
->>>>>>> origin/master
 import MainHeader from "../Components/MainHeader";
 import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
 import { ResumeList } from "../sample";
-<<<<<<< HEAD
-import { Link , useNavigate} from "react-router-dom";
-import Modal from "../Components/Modal";
-import ApplyInfo from "../Components/AppyInfo";
-import VCRequest from "../Components/VCRequest";
-import { forDemo } from "../atoms";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import Web3 from 'web3';
-import instance from './config';
-import { CONTACT_ABI, CONTACT_ADDRESS } from './config';
- 
-=======
+
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "../Components/Modal";
 import ApplyInfo from "../Components/AppyInfo";
@@ -26,7 +12,6 @@ import VCRequest from "../Components/VCRequest";
 import { useRecoilValue } from "recoil";
 import { isLoggedinAtom } from "../atoms";
 
->>>>>>> origin/master
 const Entire = styled.div`
     width: 100%;
 `;
@@ -166,36 +151,6 @@ function MyPage() {
     const [isOpenModal, setOpenModal] = useState(false);
     const [isApplyList, setIsApplyList] = useState(true);
     const [isVCList, setIsVCList] = useState(false);
-<<<<<<< HEAD
-    const navigate = useNavigate();    
-    const useRecoilDemo = useRecoilValue(forDemo);
-
-    const [account, setAccount] = useState(); // state variable to set account.
-
-
-    // const initWeb3 = async () => {
-    //     if (typeof window.ethereum !== 'undefined') {
-    //       window.web3 = new Web3(window.web3.currentProvider);
-    //       try {
-    //         await window.ethereum.enable();
-    //         console.log(`✅ Connected Properly`)
-    //       } catch (err) {
-    //         console.log(`❌ ETH NONO!`,err)
-    //       }
-    //     } else {
-    //       console.log("no !!!!!")
-    //     }
-    
-    //     window.web3.eth.getAccounts().then(res => {
-    //       console.log(`현재 사용자 : ${res[0]}`);
-    //       setUser(res[0]);
-    //     });
-    
-    //     console.log("CP:", window.web3.currentProvider);
-    //     account(new window.web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS));
-    // };
-  
-=======
     const isLoggedin = useRecoilValue(isLoggedinAtom);
     const navigate = useNavigate();
 
@@ -205,7 +160,6 @@ function MyPage() {
             navigate("/Signin");
         }
     },[]);
->>>>>>> origin/master
 
   
     const onClickToggleModal = useCallback(() => {

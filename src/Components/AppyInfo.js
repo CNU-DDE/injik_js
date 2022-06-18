@@ -109,11 +109,7 @@ function ApplyInfo() {
             </Info>
             <CoverLetter>
                 <CLHeader>
-<<<<<<< HEAD
-                    <span>📌{" "}지원서</span>
-=======
                     <span>📌{" "}계약서</span>
->>>>>>> origin/master
                 </CLHeader>
                 <CL>
                 이력서

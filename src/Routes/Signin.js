@@ -145,26 +145,15 @@ function Signin() {
             axios(config)
             .then(function (response) {
             console.log(JSON.stringify(response.data));
-<<<<<<< HEAD
-            console.log(document.cookie)
-=======
             //console.log(document.cookie)
             setIsLogined(true);
             // setIsEmploy(data.); keystore로 회원정보 가져와야댐 !!!!!!!!!!!!!!!
             setKeystore(JSON.stringify(data.keystore));
             navigate("/");
->>>>>>> origin/master
             })
             .catch(function (error) {
             console.log(error);
         });
-<<<<<<< HEAD
-        setRecoilLogin(true);
-        navigate("/");
-
-        //setRecoilEmployee(isEmployee);
-=======
->>>>>>> origin/master
     };
 
     //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
