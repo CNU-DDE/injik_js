@@ -4,10 +4,12 @@ services:
   ## @services.nginx NGINX exposed proxy
   web:
     container_name: web 
-    build: .
+    image: haeramkeem/injik-nginx
+    restart: always
+    volumes:
+      - ./build:/usr/share/nginx/html:ro
     ports:
       - 60080:80
-    restart: always
     environment:
       - "BROCCOLI_HOST=broccoli"
       - "BROCCOLI_PORT=7772"
