@@ -136,9 +136,14 @@ function VCIssue() {
         PostJSON.issuer = issuer;
         PostJSON.title = data.title;
         PostJSON.claim = tempObj;
-        console.log(PostJSON);
-        alert("요청되었습니다.");
-        navigate("/");
+        axios.post(`http://${window.location.hostname}:60080/api/v0/claim`, PostJSON)
+        .then(() => {
+            alert("요청되었습니다.");
+            navigate("/");
+        }).catch(err => {
+            console.warn(err);
+            alert("요청에 실패했습니다.");
+        });
     }
     //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
