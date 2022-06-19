@@ -44,12 +44,6 @@ const VCSelect = styled.select`
     width: 200px;
 `;
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ];
-
 const Form = styled.form`
     width: 100%;
 `;
@@ -95,14 +89,28 @@ function VCIssue() {
     } = useForm();
     
     const [issuer, setIssuer] = useState("");
+    const [options, setOption] = useState([]);
     const isLoggedin = useRecoilValue(isLoggedinAtom);
+    const axios = require("axios");
 
     useEffect(() => {
         if(!isLoggedin) {
             alert("로그인이 필요합니다");
             navigate("/Signin");
         }
+        axios.get(`http://${window.location.hostname}:60080/api/v0/user?type=0`)
+        .then(res => {
+            console.log(res.data);
+            setOption(res.data.users.map(user => ({
+                value: user.did,
+                label: user.display_name,
+            })));
+        }).catch(err => {
+            console.wanr(err);
+            alert("구직자 정보를 가져오는데 실패했습니다.");
+        });
     },[]);
+
     const IssuerSelect = (option) => {
         setIssuer(option.value);
     }
@@ -128,9 +136,14 @@ function VCIssue() {
         PostJSON.issuer = issuer;
         PostJSON.title = data.title;
         PostJSON.claim = tempObj;
-        console.log(PostJSON);
-        alert("요청되었습니다.");
-        navigate("/");
+        axios.post(`http://${window.location.hostname}:60080/api/v0/claim`, PostJSON)
+        .then(() => {
+            alert("요청되었습니다.");
+            navigate("/");
+        }).catch(err => {
+            console.warn(err);
+            alert("요청에 실패했습니다.");
+        });
     }
     //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
