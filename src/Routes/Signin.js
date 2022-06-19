@@ -114,8 +114,7 @@ const LoginAlterfind = styled(Link)`
     color: ${(props) => props.theme.gray};
     text-decoration-line: none;
     font-size: 13px;
-
-`
+`;
 
 function Signin() {
     const { register, handleSubmit, formState, setError, } = useForm();

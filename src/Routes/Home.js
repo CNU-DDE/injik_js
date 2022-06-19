@@ -123,7 +123,7 @@ function Home() {
                     {FullTimeList.map(element => (
                         <li key={element.no}>
                             <Link
-                            to={{pathname: `/${element.cata}/${element.no}`}}
+                            to={{pathname: `/Post/${element.no}`}}
                             state={{name: element.name, cata: element.cata, no: element.no}}
                             style={{textDecorationLine: "none"}}
                             >
@@ -147,7 +147,7 @@ function Home() {
                     {PartTimeList.map(element => (
                         <li key={element.no}>
                             <Link
-                            to={{pathname: `/${element.cata}/${element.no}`}}
+                            to={{pathname: `/Post/${element.no}`}}
                             state={{name: element.name, no: element.no, }}
                             style={{textDecorationLine: "none"}}
                             >
@@ -169,7 +169,7 @@ function Home() {
                     {InternList.map(element => (
                         <li key={element.no}>
                             <Link
-                            to={{pathname: `/${element.cata}/${element.no}`}}
+                            to={{pathname: `/Post/${element.no}`}}
                             state={{name: element.name, cata: element.cata, no: element.no}}
                             style={{textDecorationLine: "none"}}
                             >
