@@ -3,7 +3,7 @@ version: '3.9'
 services:
   ## @services.nginx NGINX exposed proxy
   web:
-    container_name: web 
+    container_name: web
     image: haeramkeem/injik-nginx
     restart: always
     volumes:
@@ -31,6 +31,19 @@ services:
       - "MONGO_INITDB_USERNAME=${MONGODB_USER}"
       - "MONGO_INITDB_PASSWORD=${MONGODB_PASSWORD}"
       - "MONGO_INITDB_DATABASE=${MONGODB_DATABASE}"
+  ## @services.mongo-express MongoDB web browser
+  mongo-express:
+    container_name: mongoexpress
+    image: mongo-express:1.0.0-alpha
+    restart: always
+    ports:
+      - 60079:8081
+    environment:
+      - "ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGODB_USER}"
+      - "ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGODB_PASSWORD}"
+      - "ME_CONFIG_MONGODB_URL=mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@mongo:27017/${MONGODB_DATABASE}"
+    depends_on:
+      - mongodb
   ## @services.mariadb MariaDB for broccoli
   mariadb:
     container_name: mariadb
@@ -44,6 +57,14 @@ services:
       - "MARIADB_DATABASE=${MARIADB_DATABASE}"
     ports:
       - 3306:3306
+  ## @services.phpmyadmin MariaDB web browser
+  phpmyadmin:
+    image: phpmyadmin:5.1.3
+    links:
+      - "mariadb:db"
+    container_name: phpmyadmin
+    ports:
+      - 60078:80
   ## @services.did-core Old version of did-core container for SSI APIs
   did-core:
     container_name: did-core
