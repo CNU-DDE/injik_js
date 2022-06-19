@@ -100,7 +100,6 @@ function VCIssue() {
         }
         axios.get(`http://${window.location.hostname}:60080/api/v0/user?type=0`)
         .then(res => {
-            console.log(res.data);
             setOption(res.data.users.map(user => ({
                 value: user.did,
                 label: user.display_name,
@@ -116,7 +115,6 @@ function VCIssue() {
     }
 
     const onValid = (data) => {
-        console.log(issuer);
         if(issuer==="") {
             alert("발급처를 선택해주세요");
         } else {
