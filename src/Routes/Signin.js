@@ -141,7 +141,7 @@ function Signin() {
         axios.default.withCredentials = true;   
         const config = {
             method: 'post',
-            url: 'http://saltwalks.ddns.net:60080/api/v0/user/token',
+            url: 'http://localhost:60080/api/v0/user/token',
             headers: { 
                 'Content-Type': 'application/json',
             },

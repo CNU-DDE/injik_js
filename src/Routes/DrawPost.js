@@ -242,26 +242,28 @@ function DrawPost() {
         console.log(data);
 
         const axios = require('axios');
-        axios.defaults.withCredentials = true;
         
         const config = {
           method: 'post',
-          url: 'http://saltwalks.ddns.net:60072/api/v0/position',
+          url: 'http://localhost:60080/api/v0/position',
           headers: { 
             'Content-Type': 'application/json',
           },
           data :JSON.stringify(data),
         };
         
-        axios.post('http://saltwalks.ddns.net:60072/api/v0/position', data, { withCredentials:true})
+        axios(config)
         .then(function (response) {
-          console.log(JSON.stringify(response.data));
+            console.log(JSON.stringify(response.data));
+            alert("공고등록완료");
+            navigate("/");
         })
         .catch(function (error) {
-          console.log(error);
+            console.log(error);
+            alert("입력정보가 잘못되었습니다.");
         });
-
     }
+
 //━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
@@ -334,7 +336,7 @@ function DrawPost() {
                                     <Input
                                     {...register("payment_per_interval", {required: true})}/>
                                 </ConditionItem>
-                                <ConditionItem>
+                                <ConditionItem type="number">
                                     <span>모집인원</span>
                                     <Input
                                     {...register("hiring_number", {required: true})}/>

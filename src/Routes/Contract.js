@@ -7,7 +7,7 @@ import SubmitButton from "../Components/SubmitButton";
 import person1 from "../img/person1.png";
 import person2 from "../img/person2.png";
 import { useRecoilValue } from "recoil";
-import { isLoggedinAtom } from "../atoms";
+import { isLoggedinAtom, keystoreAtom} from "../atoms";
 
 const Entire = styled.div`
     display: flex;
@@ -129,8 +129,10 @@ function Contract() {
     const params = useParams();
     const navigate = useNavigate();
     const isLoggedin = useRecoilValue(isLoggedinAtom);
+    const keyStoreValue = useRecoilValue(keystoreAtom);
 
     useEffect(() => {
+        console.log(JSON.parse(keyStoreValue).walletAddress);
         if(!isLoggedin) {
             alert("로그인이 필요합니다");
             navigate("/Signin");

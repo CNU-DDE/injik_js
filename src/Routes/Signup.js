@@ -143,7 +143,7 @@ function Signup () {
 
        const config = {
            method: 'post',
-           url: 'http://saltwalks.ddns.net:60080/api/v0/user',
+           url: 'http://localhost:60080/api/v0/user',
            headers: { 
                'Content-Type': 'application/json'
            },
@@ -238,10 +238,17 @@ function Signup () {
                     {...register("display_name", {required: true})}
                     placeholder="이름">
                     </InfoItem>
+                    {isEmployer ?
+                    <InfoItem
+                    {...register("birth", {required: true})}
+                    placeholder="회사코드">
+                    </InfoItem>
+                    :
                     <InfoItem
                     {...register("birth", {required: true})}
                     placeholder="생년월일 ex) 1998.09.12">
                     </InfoItem>
+                    }
                     <InfoItem
                     {...register("address", {required: true})}
                     placeholder="주소">
