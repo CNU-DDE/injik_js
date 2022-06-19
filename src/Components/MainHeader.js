@@ -7,6 +7,7 @@ import logo from "../img/injiklogo.png";
 import searchicon from "../img/searchicon.png";
 import { isLoggedinAtom, isEmployAtom, keystoreAtom } from "../atoms";
 import { useRecoilValue, useSetRecoilState, useResetRecoilState, useRecoilState} from "recoil";
+import { useCookies } from "react-cookie";
 
 const UlParent = styled.ul`
     list-style: none;
@@ -170,6 +171,7 @@ function MainHeader() {
     const [isEmploy, setIsEmploy] = useRecoilState(isEmployAtom);
     const [keystore, setKeystore] = useRecoilState(keystoreAtom);
     const [search, setSearch] = useState("");
+    const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
 
     const reload = () => {
         navigate("/");
@@ -209,9 +211,11 @@ function MainHeader() {
     }
 
     const logoutClick = () => {
+        removeCookie("access_token", { path: "/" });
         setIsLogined(false);
         setIsEmploy(false);
         setKeystore("");
+        alert("로그아웃 되었습니다.");
     }
 
     const toVCIssue = () => {
