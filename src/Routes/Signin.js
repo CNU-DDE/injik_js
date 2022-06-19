@@ -137,10 +137,9 @@ function Signin() {
         }
         data.keystore = JSON.parse(data.keystore);
         const axios = require('axios'); 
-        axios.default.withCredentials = true;   
         const config = {
             method: 'post',
-            url: 'http://localhost:60080/api/v0/user/token',
+            url: `http://${window.location.hostname}:60080/api/v0/user/token`,
             headers: { 
                 'Content-Type': 'application/json',
             },
@@ -150,9 +149,8 @@ function Signin() {
         axios(config)
         .then(function (response) {
             console.log(JSON.stringify(response.data));
-            //console.log(document.cookie)
             setIsLogined(true);
-            // setIsEmploy(data.); keystore로 회원정보 가져와야댐 !!!!!!!!!!!!!!!
+            setIsEmploy(response.data.user.user_type === 1);
             setKeystore(JSON.stringify(data.keystore));
             navigate("/");
         })
