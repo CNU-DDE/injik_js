@@ -143,7 +143,7 @@ function Signup () {
 
        const config = {
            method: 'post',
-           url: 'http://localhost:60080/api/v0/user',
+           url: 'http://saltwalks.ddns.net:60080/api/v0/user',
            headers: { 
                'Content-Type': 'application/json'
            },
