@@ -1,0 +1,91 @@
+version: '3.9'
+
+services:
+  ## @services.nginx NGINX exposed proxy
+  web:
+    container_name: web 
+    image: haeramkeem/injik-nginx
+    restart: always
+    volumes:
+      - ./build:/usr/share/nginx/html:ro
+    ports:
+      - 60080:80
+    environment:
+      - "BROCCOLI_HOST=broccoli"
+      - "BROCCOLI_PORT=7772"
+      - "DID_HOST=did-core"
+      - "DID_PORT=7771"
+      - "FE_HOST=${FE_HOST}"
+  ## @services.mongodb MongoDB container for did-core
+  mongodb:
+    container_name: mongodb
+    image: haeramkeem/didcore-mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mgdata:/data/db
+    environment:
+      - "MONGO_INITDB_ROOT_USERNAME=${MONGODB_ROOT_USER}"
+      - "MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}"
+      - "MONGO_INITDB_USERNAME=${MONGODB_USER}"
+      - "MONGO_INITDB_PASSWORD=${MONGODB_PASSWORD}"
+      - "MONGO_INITDB_DATABASE=${MONGODB_DATABASE}"
+  ## @services.mariadb MariaDB for broccoli
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10.8.2-rc-focal
+    volumes:
+      - mrdata:/var/lib/mysql
+    environment:
+      - "MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}"
+      - "MARIADB_USER=${MARIADB_USER}"
+      - "MARIADB_PASSWORD=${MARIADB_PASSWORD}"
+      - "MARIADB_DATABASE=${MARIADB_DATABASE}"
+    ports:
+      - 3306:3306
+  ## @services.did-core Old version of did-core container for SSI APIs
+  did-core:
+    container_name: did-core
+    image: haeramkeem/did-core
+    environment:
+      - "INFURA_PID=${INFURA_PID}"
+      - "BROCCOLI_HOST=broccoli"
+      - "BROCCOLI_PORT=7772"
+      - "MONGODB_HOST=mongodb"
+      - "MONGODB_PORT=27017"
+      - "MONGODB_USER=${MONGODB_USER}"
+      - "MONGODB_PASSWORD=${MONGODB_PASSWORD}"
+      - "MONGODB_DATABASE=${MONGODB_DATABASE}"
+      - "IPFS_URL_PREFIX=${IPFS_URL_PREFIX}"
+    ports:
+      - 7771:7771 # THIS IS NOT EXPOSED DUE TO UFW POLICY
+    restart: always
+    depends_on:
+      - mongodb
+  ## @services.broccoli Broccoli microservice
+  broccoli:
+    container_name: broccoli
+    image: haeramkeem/broccoli
+    environment:
+      - "MARIADB_HOST=mariadb"
+      - "MARIADB_PORT=3306"
+      - "MARIADB_USER=${MARIADB_USER}"
+      - "MARIADB_PASSWORD=${MARIADB_PASSWORD}"
+      - "MARIADB_DATABASE=${MARIADB_DATABASE}"
+      - "RUNLEVEL=production"
+      - "DID_HOST=did-core"
+      - "DID_PORT=7771"
+      - "JWT_SECR=${JWT_SECR}"
+      - "FE_HOST=${FE_HOST}"
+      - "FE_PORT=${FE_PORT}"
+      - "ALLOWED_CORS_ORIGIN=http://localhost:3000"
+    ports:
+      - 7772:7772 # THIS IS NOT EXPOSED DUE TO UFW POLICY
+    depends_on:
+      - did-core
+      - mariadb
+    restart: always
+volumes:
+  mgdata:
+  mrdata:
