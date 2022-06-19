@@ -1,8 +1,9 @@
 import { atom } from "recoil";
+import { Cookies } from 'react-cookie';
 
 export const isLoggedinAtom = atom({
   key: "isLoggedin",
-  default: false,
+  default: !!(new Cookies().get("access_token")),
 });
 
 export const isEmployAtom = atom({
