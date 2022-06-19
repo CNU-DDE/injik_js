@@ -8,10 +8,10 @@ export const isLoggedinAtom = atom({
 
 export const isEmployAtom = atom({
     key: "isEmployee",
-    default: false,
+    default: window.sessionStorage.getItem("userType") === "1",
 });
 
 export const keystoreAtom = atom({
   key: "keystore",
-  default: "",
+  default: window.sessionStorage.getItem("keystore") || "",
 });

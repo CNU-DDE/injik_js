@@ -149,9 +149,13 @@ function Signin() {
         axios(config)
         .then(function (response) {
             console.log(JSON.stringify(response.data));
+            const userType = "" + response.data.user.user_type;
+            const keystore = JSON.stringify(data.keystore);
             setIsLogined(true);
-            setIsEmploy(response.data.user.user_type === 1);
-            setKeystore(JSON.stringify(data.keystore));
+            setIsEmploy(userType === "1");
+            setKeystore(keystore);
+            window.sessionStorage.setItem("userType", userType); // Use sessionStorage for storing user type
+            window.sessionStorage.setItem("keystore", keystore); // Use sessionStorage for storing keystore
             navigate("/");
         })
         .catch(function (error) {

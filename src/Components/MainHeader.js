@@ -215,6 +215,7 @@ function MainHeader() {
         setIsLogined(false);
         setIsEmploy(false);
         setKeystore("");
+        window.sessionStorage.clear();
         alert("로그아웃 되었습니다.");
     }
 
