@@ -20,7 +20,7 @@ const SideTab = styled.ul`
     margin: 50px 0 0;
     border-bottom: 3px solid ${(props) => props.theme.skyblue};
     display: flex;
-    width: 40%;
+    width: 600px;
     padding: 0;
 `;
 
@@ -50,7 +50,7 @@ const Main = styled.ul`
     display: flex;
     justify-content: center;
     background-color: ${(props) => props.theme.white};
-    width: 40%;
+    width: 610px;
     height: 600px;
     box-shadow: 0 0 8px rgb(0 0 0 / 6%);
     margin-bottom: 30px;
@@ -84,7 +84,7 @@ const SearchDataItem = styled(Link)`
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #e6e6e6;
-    width: 700px;
+    width: 500px;
     padding: 20px 0;
 
     span {
