@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import SubmitButton from "./SubmitButton";
 import { ResumeList } from "../sample";
 import { useNavigate } from "react-router";
+import { CONTACT_ABI, CONTACT_ADDRESS } from '../config';
+import { isLoggedinAtom, keystoreAtom} from "../atoms";
+import Web3 from 'web3'
+
 
 const Main = styled.main`
     height: 100%;
@@ -89,8 +93,41 @@ const Footer = styled.footer`
 function ApplyInfo() {
     const navigate = useNavigate();
 
+    const [contract, setContract] = useState({});
+    const [User, setUser] = useState("");
+
+
+    const initWeb3 = async () => {
+        if (typeof window.ethereum !== 'undefined') {
+          window.web3 = new Web3(window.web3.currentProvider);
+          try {
+            await window.ethereum.enable();
+            console.log(`✅ Connected Properly`)
+          } catch (err) {
+            console.log(`❌ ETH NONO!`,err)
+          }
+        } else {
+          console.log("no !!!!!")
+        }
+
+        window.web3.eth.getAccounts().then(res => {
+            console.log(`현재 사용자 : ${res[0]}`);
+            setUser(res[0]);
+          });
+      
+          console.log("CP:", window.web3.currentProvider);
+          setContract(new window.web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS));
+          console.log(CONTACT_ADDRESS);
+          console.log(CONTACT_ABI);
+          console.log(contract);
+    }
+
+
+
     const ContractClick = () => {
+        initWeb3();
         navigate("/Full/3/contract");
+        
     }
 
     return(

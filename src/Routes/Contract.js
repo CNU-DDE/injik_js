@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import styled from "styled-components";
 import DatePicker from "react-datepicker";
@@ -7,6 +7,8 @@ import SubmitButton from "../Components/SubmitButton";
 import person1 from "../img/person1.png";
 import person2 from "../img/person2.png";
 import { useRecoilValue } from "recoil";
+import Web3 from 'web3'
+import { CONTACT_ABI, CONTACT_ADDRESS } from '../config';
 import { isLoggedinAtom, keystoreAtom} from "../atoms";
 
 const Entire = styled.div`
@@ -130,22 +132,71 @@ function Contract() {
     const navigate = useNavigate();
     const isLoggedin = useRecoilValue(isLoggedinAtom);
     const keyStoreValue = useRecoilValue(keystoreAtom);
+    const [contract, setContract] = useState({});
+    const [User, setUser] = useState("");
+
+
 
     useEffect(() => {
-        console.log(JSON.parse(keyStoreValue).walletAddress);
+        //console.log(JSON.parse(keyStoreValue).walletAddress);
         if(!isLoggedin) {
             alert("로그인이 필요합니다");
             navigate("/Signin");
         }
     },[]);
 
+
     const returnClick = () => {
         navigate("/");
     }
 
-    const SubmitClick = () => {
-        alert("계약되었습니다.");
-        navigate("/");
+    const initWeb3 = async () => {
+        if (typeof window.ethereum !== 'undefined') {
+          window.web3 = new Web3(window.web3.currentProvider);
+          try {
+            await window.ethereum.enable();
+            console.log(`✅ Connected Properly`)
+          } catch (err) {
+            console.log(`❌ ETH NONO!`,err)
+          }
+        } else {
+          console.log("no !!!!!")
+        }
+
+        window.web3.eth.getAccounts().then(res => {
+            console.log(`현재 사용자 : ${res[0]}`);
+            setUser(res[0]);
+          });
+      
+          //console.log("CP:", window.web3.currentProvider);
+          setContract(new window.web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS));
+    }
+
+    
+
+    const SubmitClick = async () => {
+        //alert("계약되었습니다.");
+        initWeb3();
+        await contract.methods.writeResumeEmployer({_ipfs:"sdfas112q13"},'0x9876e76bb936Cc425D27073A9E0ea3E4f755267d').
+        send({from:User, gas:600000, gasPrice: null}).then(result => {
+            console.log(result);
+            //칸 초기화
+        })
+
+        //navigate("/");
+    }
+
+    const GetClick = async () => {
+        //alert("계약되었습니다.");
+        //initWeb3();
+
+        await contract.methods.getResumeInfoEmployerAddress({_ipfs:"sdfas11213"}).
+        call({from:User, gas:300000, gasPrice: null}).then(result => {
+            console.log(result);
+            //칸 초기화
+        })
+
+        //navigate("/");
     }
      
     return (
@@ -184,6 +235,9 @@ function Contract() {
                     <SubmitButton 
                     text="계약하기"
                     onClick={SubmitClick}/>
+                    <SubmitButton 
+                    text="조회하기"
+                    onClick={GetClick}/>
                 </Submit>
                 {/* <ImgSection>  
                     <Img src={require("../img/contract.jpeg")}/>

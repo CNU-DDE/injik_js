@@ -8,6 +8,7 @@ import DrawPost from "./Routes/DrawPost";
 import SearchInfo from "./Routes/SearchInfo";
 import Contract from "./Routes/Contract";
 import MyPage from "./Routes/MyPage";
+import Ipfs from "./Routes/Ipfs";
 import VCIssue from "./Routes/VCIssue";
 
 const AppRouter = () => {
@@ -23,6 +24,7 @@ const AppRouter = () => {
                 <Route path="/:brandname" element={<SearchInfo/>}></Route>
                 <Route path="/VCIssue" element={<VCIssue/>}></Route>
                 <Route path="/MyPage" element={<MyPage/>}></Route>
+                <Route path="/Ipfs" element={<Ipfs/>}></Route>
                 <Route path="/:cata/:no/Contract" element={<Contract/>}></Route>
             </Routes>        
         </Router>
