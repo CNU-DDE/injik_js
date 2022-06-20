@@ -164,9 +164,13 @@ function MyPage() {
         ]
     };
 
-    const onClickModal = useCallback((el) => () => {
-        setObj(el);
-        setId()
+    // const onClickModal = useCallback((el) => () => {
+    //     setObj(el);
+    //     setId()
+    //     setOpenModal(!isOpenModal);
+    // }, [isOpenModal]);
+
+    const onClickModal = useCallback(() => {
         setOpenModal(!isOpenModal);
     }, [isOpenModal]);
 
@@ -208,7 +212,7 @@ function MyPage() {
         {isOpenModal && ( 
         <Modal onClickToggleApplyInfo={onClickModal}>
             {isApplyList && <ApplyInfo/>}
-            {isVCList && <VCConfirm obj={obj}/>}
+            {isVCList && <VCConfirm/>}
         </Modal>
         )}
             <MainHeader/>

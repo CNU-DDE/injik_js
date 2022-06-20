@@ -191,16 +191,16 @@ function DrawResume() {
                             <nav>
                             <InfodivInfo>
                                 <InfoItem>
-                                    <span>배성민</span><span>생년 월일</span>
+                                    <span>송강</span><span>1996.03.12</span>
                                 </InfoItem>
                                 <InfoItem>
-                                    <span>연락처:</span><span>XXX-XXXX-XXXX</span>
+                                    <span>연락처:</span><span>01087654321</span>
                                 </InfoItem>
                                 <InfoItem>
-                                    <span>이메일:</span><span>1998.09.16</span>
+                                    <span>이메일:</span><span>song@gmail.com</span>
                                 </InfoItem>
                                 <InfoItem>
-                                    <span>주소:</span><span>대전광역시</span>
+                                    <span>주소:</span><span>대전광역시서구갈마동</span>
                                 </InfoItem>
                             </InfodivInfo>
                             </nav>

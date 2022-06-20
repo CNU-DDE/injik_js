@@ -233,9 +233,6 @@ function Contract() {
                 </ContractInfo>
                 <Submit>
                     <SubmitButton 
-                    text="계약하기"
-                    onClick={SubmitClick}/>
-                    <SubmitButton 
                     text="조회하기"
                     onClick={GetClick}/>
                 </Submit>
