@@ -5,6 +5,7 @@ import MainFooter from "../Components/MainFooter";
 import { PostList } from "../sample";
 import { useParams } from "react-router";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Entire = styled.main`
     display: flex;
@@ -19,7 +20,7 @@ const SideTab = styled.ul`
     margin: 50px 0 0;
     border-bottom: 3px solid ${(props) => props.theme.skyblue};
     display: flex;
-    width: 70%;
+    width: 40%;
     padding: 0;
 `;
 
@@ -46,9 +47,11 @@ const SideTabItem = styled.li`
 `;
 
 const Main = styled.ul`
+    display: flex;
+    justify-content: center;
     background-color: ${(props) => props.theme.white};
-    width: 70%;
-    height: 1000px;
+    width: 40%;
+    height: 600px;
     box-shadow: 0 0 8px rgb(0 0 0 / 6%);
     margin-bottom: 30px;
 
@@ -62,11 +65,32 @@ const Header = styled.header`
     display: flex;
     align-items: center;
     height: 100px;
-    background-color: aqua;
     span {
         font-weight: bold;
         font-size: 20px;
         margin-left: 20px;
+    }
+`;
+
+const SearchData = styled.ul`
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+`;
+
+const SearchDataItem = styled(Link)`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e6e6e6;
+    width: 700px;
+    padding: 20px 0;
+
+    span {
+        font-size: 16px;
+        font-weight: bold;
+        color: ${(props) => props.theme.deepgray}
     }
 `;
 
@@ -75,16 +99,31 @@ function SearchInfo() {
     const [searchDataList, setSearchDataList] = useState([]);
 
     useEffect(() => {
-        PostList.positions.map((element) => {
-            console.log(search+element.employer.display_name);
-            if(element.employer.display_name === search) {
-                //setSearchDataList(...searchDataListelement);
-                
-            }
-        });
-        //console.log(searchData);
-    },[]);
+        const axios = require('axios');
 
+        const config = {
+        method: 'get',
+        url: 'http://localhost:60080/api/v0/position',
+        headers: { }
+        };
+
+        axios(config)
+        .then(function (response) {
+            console.log(search);
+            console.log((response.data.positions));
+            response.data.positions.map((element) => {
+                console.log(element.employer.display_name);
+                if(search === element.employer.display_name) {
+                    setSearchDataList((searchDataList) => [...searchDataList, element]);
+                    console.log("라인in");
+                }
+            });
+            console.log(searchDataList);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    },[]);
 
     return (
         <>
@@ -107,7 +146,23 @@ function SearchInfo() {
             <Main>
                 <Post>
                     <Header><span>채용공고</span></Header>
-                    
+                    <SearchData>
+                    { searchDataList.map((element,index) => {
+                            return(
+                                <li>
+                                    <SearchDataItem
+                                    to={{pathname: `/Post/${search}`}}
+                                    state={element}
+                                    style={{textDecorationLine: "none"}}
+                                    > 
+                                    <span>{index+1}</span>
+                                    <span>{element.title}</span>
+                                    <span>{element.employment_period}</span>
+                                    </SearchDataItem>
+                                </li>
+                            );
+                    })}
+                    </SearchData>
                 </Post>
             </Main>
         </Entire>

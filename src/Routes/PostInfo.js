@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useParams } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router";
 import { useNavigate } from "react-router";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
@@ -102,7 +102,6 @@ const MainEmplorerInfoUl = styled.ul`
     margin-left: 20px;
 `;
 
-
 const MainBottom = styled.footer`
     display: flex;
     justify-content: center;
@@ -131,9 +130,12 @@ const MainBottomButton = styled.button`
 function PostInfo() {
     const navigate = useNavigate();
     const params = useParams();
+    const CareerInfo = useLocation().state;
     const isLoggedin = useRecoilValue(isLoggedinAtom);
+    const [Info, setInfo] = useState();
 
     useEffect(() => {
+        setInfo(CareerInfo);
         if(!isLoggedin) {
             alert("로그인이 필요합니다");
             navigate("/Signin");
@@ -157,22 +159,22 @@ function PostInfo() {
                 </MainBack>
                 <MainHeader>
                     <MainHeaderName>
-                        KAKAO
+                        {Info?.title}
                     </MainHeaderName>
                 </MainHeader>
                 <MainCondition>
                     <MainConditionUl>
                         <MainConditionLi>
-                            근무형태: 채용
+                            {`모집인원: ${Info?.hiring_number}`} 
                         </MainConditionLi>
                         <MainConditionLi>
-                            근무기간: 10년
+                            {`근무기간: ${Info?.employment_period}`} 
                         </MainConditionLi>
                         <MainConditionLi>
-                            근무요일,시간: 평일, 09:00 ~ 17:00
+                            {`근무시간: ${Info?.working_time}`}
                         </MainConditionLi>
                         <MainConditionLi>
-                            급여: 급여협의
+                            {`급여: ${Info?.payment_per_interval}`}
                         </MainConditionLi>
                     </MainConditionUl>
                 </MainCondition>
@@ -192,14 +194,14 @@ function PostInfo() {
                 <MainEmplorerInfo>
                     <MainEmplorerInfoUl>
                         <MainEmplorerInfoLi>
-                            채용담당자: 카카오
+                            {`채용자담당자: ${Info?.employer.display_name}`}
                         </MainEmplorerInfoLi>
                         <MainEmplorerInfoLi>
-                            H.P: 010-3387-9513
+                            {`지급형태: ${Info?.payment_interval_type}`}
                         </MainEmplorerInfoLi>
-                        <MainEmplorerInfoLi>
+                        {/* <MainEmplorerInfoLi>
                             Email: qo98333@naver.com
-                        </MainEmplorerInfoLi>
+                        </MainEmplorerInfoLi> */}
                     </MainEmplorerInfoUl>
                 </MainEmplorerInfo>
                 <MainBottom>
