@@ -75,8 +75,15 @@ const CareerItems = styled.li`
 `;
 
 const CareerItem = styled.li`
+    display: flex;
+    flex-direction: column;
     padding: 5px;
     font-size: 16px;
+
+    span {
+        line-height: 30px;
+        font-weight: bold;
+    }
 `;
 
 const Footer = styled.footer`
@@ -93,6 +100,11 @@ function VCConfirm({obj}) {
         navigate("/Full/3/contract");
     }
 
+    const ConfirmClick = () => {
+        alert("발급되었습니다.");
+        navigate("/");
+    }
+
     useEffect(() => {
         console.log(obj);
     },[]);
@@ -104,40 +116,44 @@ function VCConfirm({obj}) {
             </Header>
             <Info>
                 <InfoItems>
-                    <li><span>이름 </span></li>
-                    <li><span>전화번호 010-1234-5678</span></li>
-                    <li><span>메일 kakao@naver.com</span></li>
-                    <li><span>주소 서울광역시</span></li>
+                    <li><span>이름 송강</span></li>
+                    <li><span>전화번호 010-8765-4321</span></li>
+                    <li><span>메일 song@gmail.com</span></li>
+                    <li><span>주소 대전광역시서구갈마동</span></li>
                 </InfoItems>
             </Info>
             <CoverLetter>
                 <CLHeader>
-                    <span>📌{" "}계약서</span>
+                    <span>💠제목: {" "}2019년 경력 요청</span>
                 </CLHeader>
                 <CL>
-                이력서
-                입니다.
+                
                 </CL>
             </CoverLetter>
             <Career>
                 <ul>
-                    { ResumeList.claims.map((element) => 
-                        <CareerItems>
+                    <CareerItems>
                             {/* <ul
                             style={{padding: "20px"}}>
                                 <CareerItem>{element.name}</CareerItem>
                                 <CareerItem>{element.id}</CareerItem>
                                 <CareerItem>{element.title}</CareerItem>
                             </ul> */}
-                            <CareerItem>계약이 채결 되었습니다.</CareerItem>
-                        </CareerItems>
-                    )}
+                            <CareerItem>
+                            <span>근무회사: 라인 애드 클라우드</span>
+                            <span>근무내용: 라인 애드 백엔드 인프라 구축</span>
+                                <span>시작날짜: 2019-03-12</span>
+                                <span>시작날짜: 2019-09-23</span>
+
+
+                            </CareerItem>
+                    </CareerItems>
                 </ul>
             </Career>
             <Footer>
                 <SubmitButton 
-                text="계약"
-                onClick={ContractClick}
+                text="발급"
+                onClick={ConfirmClick}
                 ></SubmitButton>
             </Footer>
         </Main>
