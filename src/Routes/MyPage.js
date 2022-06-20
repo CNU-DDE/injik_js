@@ -170,11 +170,14 @@ function MyPage() {
     //     setOpenModal(!isOpenModal);
     // }, [isOpenModal]);
 
-    const onClickModal = useCallback(() => {
+    const onClickToggleModal = useCallback(() => {
         setOpenModal(!isOpenModal);
     }, [isOpenModal]);
 
+    const [text, setText] = useState("");
+
     useEffect(() => {
+        setText("123");
         if(!isLoggedin) {
             alert("로그인이 필요합니다");
             navigate("/Signin");
@@ -210,7 +213,7 @@ function MyPage() {
     return (
         <Entire>
         {isOpenModal && ( 
-        <Modal onClickToggleApplyInfo={onClickModal}>
+        <Modal onClickToggleApplyInfo={onClickToggleModal}>
             {isApplyList && <ApplyInfo/>}
             {isVCList && <VCConfirm/>}
         </Modal>
@@ -262,7 +265,7 @@ function MyPage() {
                     </SubTitle>
                     <ul>
                         {temp.claims.map((element,index) => 
-                        <Item onClick={onClickModal(element)}>
+                        <Item onClick={onClickToggleModal}>
                             <span
                             style={{
                                 color: "black",
@@ -288,7 +291,7 @@ function MyPage() {
                     </SubTitle>
                     <ul>
                         {temp.claims.map((element, index) => 
-                        <Item onClick={onClickModal(element)}>
+                        <Item onClick={onClickToggleModal}>
                             <span
                             style={{
                                 color: "black",

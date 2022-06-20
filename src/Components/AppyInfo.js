@@ -137,34 +137,31 @@ function ApplyInfo() {
             </Header>
             <Info>
                 <InfoItems>
-                    <li><span>이름 카카오</span></li>
-                    <li><span>전화번호 010-1234-5678</span></li>
-                    <li><span>메일 kakao@naver.com</span></li>
-                    <li><span>주소 서울광역시</span></li>
+                    <li><span>이름 송강</span></li>
+                    <li><span>전화번호 010-8765-4321</span></li>
+                    <li><span>메일 song@gmail.com</span></li>
+                    <li><span>주소 대전광역시서구갈마동</span></li>
                 </InfoItems>
             </Info>
             <CoverLetter>
                 <CLHeader>
-                    <span>📌{" "}계약서</span>
+                    <span>📌{" "}안녕하세요</span>
                 </CLHeader>
                 <CL>
-                이력서
-                입니다.
+잘부탁드립니다.
                 </CL>
             </CoverLetter>
             <Career>
                 <ul>
-                    { ResumeList.claims.map((element) => 
-                        <CareerItems>
-                            {/* <ul
-                            style={{padding: "20px"}}>
-                                <CareerItem>{element.name}</CareerItem>
-                                <CareerItem>{element.id}</CareerItem>
-                                <CareerItem>{element.title}</CareerItem>
-                            </ul> */}
-                            <CareerItem>계약이 채결 되었습니다.</CareerItem>
-                        </CareerItems>
-                    )}
+                    <CareerItems>
+                        <CareerItem>실리콘밸리 인턴십 관련</CareerItem>
+                    </CareerItems>
+                    <CareerItems>
+                        <CareerItem>한국전력공사 기간직</CareerItem>
+                    </CareerItems>
+                    <CareerItems>
+                        <CareerItem>에트리인턴</CareerItem>
+                    </CareerItems>
                 </ul>
             </Career>
             <Footer>
