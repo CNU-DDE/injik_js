@@ -296,8 +296,8 @@ function MyPage() {
                             style={{
                                 color: "black",
                             }}>{index+1}</span>
-                            <span>{element.title}</span>
                             <span></span>
+                            <span>송강</span>
                         </Item>
                         )}
                     </ul>
