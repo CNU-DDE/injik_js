@@ -142,9 +142,12 @@ function MyPage() {
     const [isOpenModal, setOpenModal] = useState(false);
     const [isApplyList, setIsApplyList] = useState(true);
     const [isVCList, setIsVCList] = useState(false);
+    const [claimList, setClaimList] = useState([]);
+    const [resumeList, setResumeList] = useState([]);
     const isLoggedin = useRecoilValue(isLoggedinAtom);
     const isEmployee = useRecoilValue(isEmployAtom);
     const navigate = useNavigate();
+    const axios = require("axios");
 
     const onClickToggleModal = useCallback(() => {
         setOpenModal(!isOpenModal);
@@ -155,6 +158,14 @@ function MyPage() {
             alert("로그인이 필요합니다");
             navigate("/Signin");
         }
+        axios.get(`http://${window.location.hostname}:60080/api/v0/claim`)
+        .then(res => {
+            setClaimList(res.data.claims);
+        }).catch(() => {});
+        axios.get(`http://${window.location.hostname}:60080/api/v0/resume`)
+        .then(res => {
+            setResumeList(res.data.claims);
+        }).catch(() => {});
     },[]);
 
 
@@ -228,7 +239,7 @@ function MyPage() {
                         <span></span>
                     </SubTitle>
                     <ul>
-                        {ResumeList.claims.map((element,index) => 
+                        {resumeList.map((element,index) => 
                         <Item onClick={onClickToggleModal}>
                             <span
                             style={{
@@ -254,7 +265,7 @@ function MyPage() {
                         <span></span>
                     </SubTitle>
                     <ul>
-                        {EmployerCareerList.claims.map((element, index) => 
+                        {claimList.map((element, index) => 
                         <Item onClick={onClickToggleModal}>
                             <span
                             style={{
