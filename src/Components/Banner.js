@@ -67,7 +67,7 @@ function Banner() {
         slidesPerView={1}
         // navigation
         // pagination={{ clickable: true }}
-        autoplay={{ delay: 3000}}	// 추가
+        autoplay={{ delay: 2500}}	// 추가
         modules={[Autoplay, Pagination, Navigation]}
         style={{
           height: "300px",

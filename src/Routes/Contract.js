@@ -132,7 +132,7 @@ function Contract() {
     const navigate = useNavigate();
     const isLoggedin = useRecoilValue(isLoggedinAtom);
     const keyStoreValue = useRecoilValue(keystoreAtom);
-    const [contract, setContract] = useState({});
+    const [cont, setCont] = useState({});
     const [User, setUser] = useState("");
 
 
@@ -169,7 +169,7 @@ function Contract() {
           });
       
           //console.log("CP:", window.web3.currentProvider);
-          setContract(new window.web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS));
+          setCont(new window.web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS));
     }
 
     
@@ -177,7 +177,7 @@ function Contract() {
     const SubmitClick = async () => {
         //alert("계약되었습니다.");
         initWeb3();
-        await contract.methods.writeResumeEmployer({_ipfs:"sdfas112q13"},'0x9876e76bb936Cc425D27073A9E0ea3E4f755267d').
+        await cont.methods.writeResumeEmployer({_ipfs:"sdfad11jak12kjhs11213"},'0xbeFDe6b0503C15D9faC5F8067b19155DF7a7Af84').
         send({from:User, gas:600000, gasPrice: null}).then(result => {
             console.log(result);
             //칸 초기화
@@ -190,7 +190,7 @@ function Contract() {
         //alert("계약되었습니다.");
         //initWeb3();
 
-        await contract.methods.getResumeInfoEmployerAddress({_ipfs:"sdfas11213"}).
+        await cont.methods.getResumeInfoEmployerAddress({_ipfs:"sdfadajdkj111dhkjak12kjhs11213"}).
         call({from:User, gas:300000, gasPrice: null}).then(result => {
             console.log(result);
             //칸 초기화

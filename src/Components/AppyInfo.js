@@ -110,7 +110,7 @@ function ApplyInfo() {
           console.log("no !!!!!")
         }
 
-        window.web3().eth.getAccounts().then(res => {
+        window.web3.eth.getAccounts().then(res => {
             console.log(`현재 사용자 : ${res[0]}`);
             setUser(res[0]);
           });
@@ -125,7 +125,7 @@ function ApplyInfo() {
 
 
     const ContractClick = () => {
-        initWeb3();
+        //initWeb3();
         navigate("/Full/3/contract");
         
     }
