@@ -234,7 +234,7 @@ function Contract() {
                 <Submit>
                     <SubmitButton 
                     text="계약하기"
-                    onClick={GetClick}/>
+                    onClick={SubmitClick}/>
                 </Submit>
                 {/* <ImgSection>  
                     <Img src={require("../img/contract.jpeg")}/>

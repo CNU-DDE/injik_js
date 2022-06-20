@@ -157,8 +157,14 @@ function MyPage() {
         "claims": [
             {
                 "id": "62aeb98f9293b601361467e3",
-                "issuer": "did:ethr:ropsten:0x037c08aebe8039798b84e35f10736f95174e096f2e5d5b438204fdaaf19ccaee25",
-                "title": "aloha",
+                "issuer": "라인",
+                "title": "2019년 경력 요청",
+                "status": 0
+            },
+            {
+                "id": "62aeb98f9293b601361467e3",
+                "issuer": "쿠팡",
+                "title": "2022년 입사 경력",
                 "status": 0
             }
         ]
@@ -260,20 +266,20 @@ function MyPage() {
                     </Sort>
                     <SubTitle>
                         <span>no</span>
-                        <span style={{marginRight: "20px"}}>제목</span>
                         <span></span>
+                        <span style={{marginRight: "20px"}}>이름</span>
                     </SubTitle>
                     <ul>
-                        {temp.claims.map((element,index) => 
+                        {/* {temp.claims.map((element,index) => 
                         <Item onClick={onClickToggleModal}>
                             <span
                             style={{
                                 color: "black",
                             }}>{index+1}</span>
-                            <span>{element.title}</span>
                             <span></span>
+                            <span>송강</span>
                         </Item>
-                        )}
+                        )} */}
                     </ul>
                     </>
                 }
@@ -287,7 +293,7 @@ function MyPage() {
                     <SubTitle>
                         <span>no</span>
                         <span style={{marginRight: "20px"}}>제목</span>
-                        <span></span>
+                        <span>발급처</span>
                     </SubTitle>
                     <ul>
                         {temp.claims.map((element, index) => 
@@ -296,8 +302,8 @@ function MyPage() {
                             style={{
                                 color: "black",
                             }}>{index+1}</span>
-                            <span></span>
-                            <span>송강</span>
+                            <span>{element.title}</span>
+                            <span>{element.issuer}</span>
                         </Item>
                         )}
                     </ul>
