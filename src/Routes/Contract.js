@@ -209,16 +209,16 @@ function Contract() {
                 <PersonInfo> 
                     <Info>
                         <PersonImg src={person1}/>
-                        <span>배성민</span>
-                        <span>010-7722-1234</span>
-                        <span>abc@gmail.com</span>
+                        <span>송강</span>
+                        <span>01087654321</span>
+                        <span>song@gmail.com</span>
                     </Info>
                     <Split/>
                     <Info>
                         <PersonImg src={person2}/>
-                        <span>kakao</span>
-                        <span>010-1234-5678</span>
-                        <span>KAKAO@naver.com</span>
+                        <span>쿠팡</span>
+                        <span>01012345678</span>
+                        <span>coupang@gmail.com</span>
                     </Info>
                 </PersonInfo>
                 <ContractInfo>
@@ -233,7 +233,7 @@ function Contract() {
                 </ContractInfo>
                 <Submit>
                     <SubmitButton 
-                    text="조회하기"
+                    text="계약하기"
                     onClick={GetClick}/>
                 </Submit>
                 {/* <ImgSection>  
@@ -245,3 +245,5 @@ function Contract() {
 }
 
 export default Contract;
+
+
