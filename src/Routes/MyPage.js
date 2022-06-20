@@ -4,6 +4,7 @@ import MainFooter from "../Components/MainFooter";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import ApplyInfo from "../Components/AppyInfo";
+import VCConfirm from "../Components/VCConfirm";
 import VCRequest from "../Components/VCRequest";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { isLoggedinAtom, isEmployAtom } from "../atoms";
@@ -146,10 +147,26 @@ function MyPage() {
     const [resumeList, setResumeList] = useState([]);
     const isLoggedin = useRecoilValue(isLoggedinAtom);
     const isEmployee = useRecoilValue(isEmployAtom);
+    const [id, setId] = useState("");
+    const [obj, setObj] = useState(-1);
     const navigate = useNavigate();
-    const axios = require("axios");
+    const axios = require("axios")
 
-    const onClickToggleModal = useCallback(() => {
+    const temp = {
+        "error": null,
+        "claims": [
+            {
+                "id": "62aeb98f9293b601361467e3",
+                "issuer": "did:ethr:ropsten:0x037c08aebe8039798b84e35f10736f95174e096f2e5d5b438204fdaaf19ccaee25",
+                "title": "aloha",
+                "status": 0
+            }
+        ]
+    };
+
+    const onClickModal = useCallback((el) => () => {
+        setObj(el);
+        setId()
         setOpenModal(!isOpenModal);
     }, [isOpenModal]);
 
@@ -189,8 +206,9 @@ function MyPage() {
     return (
         <Entire>
         {isOpenModal && ( 
-        <Modal onClickToggleApplyInfo={onClickToggleModal}>
-            <ApplyInfo/>
+        <Modal onClickToggleApplyInfo={onClickModal}>
+            {isApplyList && <ApplyInfo/>}
+            {isVCList && <VCConfirm obj={obj}/>}
         </Modal>
         )}
             <MainHeader/>
@@ -239,8 +257,8 @@ function MyPage() {
                         <span></span>
                     </SubTitle>
                     <ul>
-                        {resumeList.map((element,index) => 
-                        <Item onClick={onClickToggleModal}>
+                        {temp.claims.map((element,index) => 
+                        <Item onClick={onClickModal(element)}>
                             <span
                             style={{
                                 color: "black",
@@ -265,8 +283,8 @@ function MyPage() {
                         <span></span>
                     </SubTitle>
                     <ul>
-                        {claimList.map((element, index) => 
-                        <Item onClick={onClickToggleModal}>
+                        {temp.claims.map((element, index) => 
+                        <Item onClick={onClickModal(element)}>
                             <span
                             style={{
                                 color: "black",

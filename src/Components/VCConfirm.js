@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import SubmitButton from "./SubmitButton";
 import { ResumeList } from "../sample";
 import { useNavigate } from "react-router";
-import { CONTACT_ABI, CONTACT_ADDRESS } from '../config';
-import { isLoggedinAtom, keystoreAtom} from "../atoms";
-import Web3 from 'web3'
-
 
 const Main = styled.main`
     height: 100%;
@@ -90,54 +86,25 @@ const Footer = styled.footer`
     margin: 40px 0;
 `;
 
-function ApplyInfo() {
+function VCConfirm({obj}) {
     const navigate = useNavigate();
 
-    const [contract, setContract] = useState({});
-    const [User, setUser] = useState("");
-
-
-    const initWeb3 = async () => {
-        if (typeof window.ethereum !== 'undefined') {
-          window.web3 = new Web3(window.web3.currentProvider);
-          try {
-            await window.ethereum.enable();
-            console.log(`✅ Connected Properly`)
-          } catch (err) {
-            console.log(`❌ ETH NONO!`,err)
-          }
-        } else {
-          console.log("no !!!!!")
-        }
-
-        window.web3().eth.getAccounts().then(res => {
-            console.log(`현재 사용자 : ${res[0]}`);
-            setUser(res[0]);
-          });
-      
-          console.log("CP:", window.web3.currentProvider);
-          setContract(new window.web3.eth.Contract(CONTACT_ABI, CONTACT_ADDRESS));
-          console.log(CONTACT_ADDRESS);
-          console.log(CONTACT_ABI);
-          console.log(contract);
-    }
-
-
-
     const ContractClick = () => {
-        initWeb3();
         navigate("/Full/3/contract");
-        
     }
+
+    useEffect(() => {
+        console.log(obj);
+    },[]);
 
     return(
         <Main>
             <Header>
-                <Resume>계약서</Resume>
+                <Resume>경력발급</Resume>
             </Header>
             <Info>
                 <InfoItems>
-                    <li><span>이름 카카오</span></li>
+                    <li><span>이름 </span></li>
                     <li><span>전화번호 010-1234-5678</span></li>
                     <li><span>메일 kakao@naver.com</span></li>
                     <li><span>주소 서울광역시</span></li>
@@ -177,4 +144,4 @@ function ApplyInfo() {
     );
 }
 
-export default ApplyInfo;
+export default VCConfirm;
