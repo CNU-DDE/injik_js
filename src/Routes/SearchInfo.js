@@ -18,7 +18,6 @@ const Entire = styled.main`
 
 const SideTab = styled.ul`
     margin: 50px 0 0;
-    border-bottom: 3px solid ${(props) => props.theme.skyblue};
     display: flex;
     width: 600px;
     padding: 0;
@@ -32,6 +31,7 @@ const SideTabItem = styled.li`
     box-shadow: 0 0 8px rgb(0 0 0 / 6%);
     border: 1px solid #dfe6e9;
     background-color: ${(props) => props.theme.white};
+    border-bottom: 3px solid ${(props) => props.theme.skyblue};
 
     span {
         display: block;
@@ -50,7 +50,7 @@ const Main = styled.ul`
     display: flex;
     justify-content: center;
     background-color: ${(props) => props.theme.white};
-    width: 610px;
+    width: 650px;
     height: 600px;
     box-shadow: 0 0 8px rgb(0 0 0 / 6%);
     margin-bottom: 30px;
